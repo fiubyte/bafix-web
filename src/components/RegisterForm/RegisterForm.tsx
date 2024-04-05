@@ -2,10 +2,14 @@ import {useFormik} from "formik";
 import "./RegisterForm.css";
 import {Button, TextField} from "@mui/material";
 import axios from "axios";
+import config from "../../config";
 
 const RegisterForm = () => {
   const formik = useFormik({
     initialValues: {
+      email: "",
+      password: "",
+      password2: "",
       name: "",
       surname: "",
       document_number: "",
@@ -17,7 +21,7 @@ const RegisterForm = () => {
     onSubmit: (values) => {
       console.log("Register form submitted:");
       console.log(values);
-      axios.post("http://localhost:80/users/", values).then((response) => {
+      axios.post(config.apiUrl + "/users/", values).then((response) => {
         console.log("User created successfully");
         console.log(response.data);
       }).catch((error) => {
@@ -29,6 +33,33 @@ const RegisterForm = () => {
 
   return (
     <form onSubmit={formik.handleSubmit} className={"RegisterForm"} noValidate autoComplete={"off"}>
+      <TextField
+        label={"Email"}
+        variant="outlined"
+        type="email"
+        name="email"
+        value={formik.values.email}
+        onChange={formik.handleChange}
+        className={"RegisterForm-input"}
+      />
+      <TextField
+        label={"Contraseña"}
+        variant="outlined"
+        type="password"
+        name="password"
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        className={"RegisterForm-input"}
+      />
+      <TextField
+        label={"Repetir contraseña"}
+        variant="outlined"
+        type="password"
+        name="password2"
+        value={formik.values.password2}
+        onChange={formik.handleChange}
+        className={"RegisterForm-input"}
+      />
       <TextField
         label={"Nombre"}
         variant="outlined"
