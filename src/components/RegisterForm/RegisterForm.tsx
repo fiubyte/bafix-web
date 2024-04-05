@@ -1,5 +1,6 @@
 import {useFormik} from "formik";
 import "./RegisterForm.css";
+import {Button, TextField} from "@mui/material";
 
 const RegisterForm = () => {
   const formik = useFormik({
@@ -18,57 +19,71 @@ const RegisterForm = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className={"RegisterForm"}>
-      <label htmlFor="name">Nombre</label>
-      <input
+    <form onSubmit={formik.handleSubmit} className={"RegisterForm"} noValidate autoComplete={"off"}>
+      <TextField
+        label={"Nombre"}
+        variant="outlined"
         type="text"
         name="name"
         value={formik.values.name}
         onChange={formik.handleChange}
+        className={"RegisterForm-input"}
       />
-      <label htmlFor="surname">Apellido</label>
-      <input
+      <TextField
+        label={"Apellido"}
+        variant="outlined"
         type="text"
         name="surname"
         value={formik.values.surname}
         onChange={formik.handleChange}
+        className={"RegisterForm-input"}
       />
-      <label htmlFor="document_number">Número de documento</label>
-      <input
+      <TextField
+        label={"DNI"}
+        variant="outlined"
         type="text"
         name="document_number"
         value={formik.values.document_number}
         onChange={formik.handleChange}
+        className={"RegisterForm-input"}
       />
-      <label htmlFor="address">Dirección</label>
-      <input
+      <TextField
+        label={"Dirección"}
+        variant="outlined"
         type="text"
         name="address"
         value={formik.values.address}
         onChange={formik.handleChange}
+        className={"RegisterForm-input"}
       />
-      <label htmlFor="phone_number">Número de teléfono</label>
-      <input
+      <TextField
+        label={"Teléfono"}
+        variant="outlined"
         type="text"
         name="phone_number"
         value={formik.values.phone_number}
         onChange={formik.handleChange}
+        className={"RegisterForm-input"}
       />
-      <label htmlFor="max_radius">Radio máximo</label>
-      <input
+      <TextField
+        label={"Radio máximo (metros)"}
+        variant="outlined"
         type="number"
         name="max_radius"
         value={formik.values.max_radius}
         onChange={formik.handleChange}
+        className={"RegisterForm-input"}
       />
-      <label htmlFor="profile_photo_url">URL de la foto de perfil</label>
-      <input
+      <TextField
+        label={"URL de la foto de perfil"}
+        variant="outlined"
         type="text"
         name="profile_photo_url"
         value={formik.values.profile_photo_url}
         onChange={formik.handleChange}
+        className={"RegisterForm-input"}
       />
-      <button type="submit">Registrarse</button>
+      <Button variant={"outlined"} type="submit">Registrarse</Button>
     </form>
   );
 }

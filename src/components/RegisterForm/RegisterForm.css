@@ -6,3 +6,8 @@
   width: 100%;
   height: 100%;
 }
+
+.RegisterForm-input {
+  margin-bottom: 1.5rem;
+  min-width: 20rem;
+}
