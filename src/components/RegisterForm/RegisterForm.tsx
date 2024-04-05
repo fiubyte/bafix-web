@@ -1,6 +1,7 @@
 import {useFormik} from "formik";
 import "./RegisterForm.css";
 import {Button, TextField} from "@mui/material";
+import axios from "axios";
 
 const RegisterForm = () => {
   const formik = useFormik({
@@ -14,7 +15,15 @@ const RegisterForm = () => {
       profile_photo_url: "",
     },
     onSubmit: (values) => {
+      console.log("Register form submitted:");
       console.log(values);
+      axios.post("http://localhost:80/users/", values).then((response) => {
+        console.log("User created successfully");
+        console.log(response.data);
+      }).catch((error) => {
+        console.error("Error creating user");
+        console.error(error);
+      });
     },
   });
 
