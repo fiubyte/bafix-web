@@ -3,8 +3,23 @@ import "./RegisterForm.css";
 import {Button, TextField} from "@mui/material";
 import axios from "axios";
 import config from "../../config";
+import * as Yup from 'yup';
 
 const RegisterForm = () => {
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Email inválido").required("Campo requerido"),
+    password: Yup.string().required("Campo requerido"),
+    password2: Yup.string().oneOf([Yup.ref('password')], 'Las contraseñas deben coincidir').required("Campo requerido"),
+    name: Yup.string().required("Campo requerido"),
+    surname: Yup.string().required("Campo requerido"),
+    document_number: Yup.string().required("Campo requerido"),
+    address: Yup.string().required("Campo requerido"),
+    phone_number: Yup.string().required("Campo requerido"),
+    max_radius: Yup.number().max(30, "El radio máximo debe ser menor o igual a 30").min(1, "El radio máximo debe ser mayor o igual a 1").required("Campo requerido"),
+    profile_photo_url: Yup.string().url("URL inválida").required("Campo requerido"),
+  });
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -29,6 +44,9 @@ const RegisterForm = () => {
         console.error(error);
       });
     },
+    validationSchema: validationSchema,
+    validateOnChange: true,
+    validateOnBlur: true,
   });
 
   return (
@@ -40,6 +58,8 @@ const RegisterForm = () => {
         name="email"
         value={formik.values.email}
         onChange={formik.handleChange}
+        error={formik.touched.email && Boolean(formik.errors.email)}
+        helperText={formik.touched.email && formik.errors.email}
         className={"RegisterForm-input"}
       />
       <TextField
@@ -49,6 +69,8 @@ const RegisterForm = () => {
         name="password"
         value={formik.values.password}
         onChange={formik.handleChange}
+        error={formik.touched.password && Boolean(formik.errors.password)}
+        helperText={formik.touched.password && formik.errors.password}
         className={"RegisterForm-input"}
       />
       <TextField
@@ -58,6 +80,8 @@ const RegisterForm = () => {
         name="password2"
         value={formik.values.password2}
         onChange={formik.handleChange}
+        error={formik.touched.password2 && Boolean(formik.errors.password2)}
+        helperText={formik.touched.password2 && formik.errors.password2}
         className={"RegisterForm-input"}
       />
       <TextField
@@ -67,6 +91,8 @@ const RegisterForm = () => {
         name="name"
         value={formik.values.name}
         onChange={formik.handleChange}
+        error={formik.touched.name && Boolean(formik.errors.name)}
+        helperText={formik.touched.name && formik.errors.name}
         className={"RegisterForm-input"}
       />
       <TextField
@@ -76,6 +102,8 @@ const RegisterForm = () => {
         name="surname"
         value={formik.values.surname}
         onChange={formik.handleChange}
+        error={formik.touched.surname && Boolean(formik.errors.surname)}
+        helperText={formik.touched.surname && formik.errors.surname}
         className={"RegisterForm-input"}
       />
       <TextField
@@ -85,6 +113,8 @@ const RegisterForm = () => {
         name="document_number"
         value={formik.values.document_number}
         onChange={formik.handleChange}
+        error={formik.touched.document_number && Boolean(formik.errors.document_number)}
+        helperText={formik.touched.document_number && formik.errors.document_number}
         className={"RegisterForm-input"}
       />
       <TextField
@@ -94,6 +124,8 @@ const RegisterForm = () => {
         name="address"
         value={formik.values.address}
         onChange={formik.handleChange}
+        error={formik.touched.address && Boolean(formik.errors.address)}
+        helperText={formik.touched.address && formik.errors.address}
         className={"RegisterForm-input"}
       />
       <TextField
@@ -103,6 +135,8 @@ const RegisterForm = () => {
         name="phone_number"
         value={formik.values.phone_number}
         onChange={formik.handleChange}
+        error={formik.touched.phone_number && Boolean(formik.errors.phone_number)}
+        helperText={formik.touched.phone_number && formik.errors.phone_number}
         className={"RegisterForm-input"}
       />
       <TextField
@@ -112,6 +146,8 @@ const RegisterForm = () => {
         name="max_radius"
         value={formik.values.max_radius}
         onChange={formik.handleChange}
+        error={formik.touched.max_radius && Boolean(formik.errors.max_radius)}
+        helperText={formik.touched.max_radius && formik.errors.max_radius}
         className={"RegisterForm-input"}
       />
       <TextField
@@ -121,6 +157,8 @@ const RegisterForm = () => {
         name="profile_photo_url"
         value={formik.values.profile_photo_url}
         onChange={formik.handleChange}
+        error={formik.touched.profile_photo_url && Boolean(formik.errors.profile_photo_url)}
+        helperText={formik.touched.profile_photo_url && formik.errors.profile_photo_url}
         className={"RegisterForm-input"}
       />
       <Button variant={"outlined"} type="submit">Registrarse</Button>
