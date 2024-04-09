@@ -1,13 +1,16 @@
 .RegisterForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  height: 100%;
 }
 
 .RegisterForm-input {
   margin-bottom: 1.5rem;
   min-width: 20rem;
+}
+
+.RegisterForm-grid {
+  max-width: 70rem;
+  margin-top: 1rem;
+  margin-left: 2rem;
 }

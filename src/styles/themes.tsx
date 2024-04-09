@@ -9,9 +9,11 @@ const mainTheme = createTheme({
     h2: {
       fontWeight: "bold",
       fontFamily: "DM Sans, sans-serif",
+      fontSize: "2rem",
     },
     h3: {
       fontFamily: "DM Sans, sans-serif",
+      fontSize: "1.5rem",
     }
   }
 });
