@@ -1,6 +1,6 @@
 import {useFormik} from 'formik';
 import './RegisterForm.css';
-import {Button, Grid, TextField, Typography} from '@mui/material';
+import {Button, Grid, Slider, TextField, Typography} from '@mui/material';
 import axios from 'axios';
 import config from '../../config';
 import * as Yup from 'yup';
@@ -121,6 +121,28 @@ const RegisterForm = (): JSX.Element => {
       <Typography variant="h3">Configuración de perfil</Typography>
       <Grid container className="RegisterForm-grid" columnSpacing={4}>
         {renderTextField('Link de la foto de perfil', 'profile_photo_url')}
+        <Grid item xs={4}>
+          <Typography variant="body1" component="label">
+            Distancia máxima (kms) <span className={"RegisterForm-required"}> *</span>
+          </Typography>
+          <Slider
+            value={formik.values.max_radius}
+            onChange={(event, value) => formik.setFieldValue('max_radius', value)}
+            valueLabelDisplay="auto"
+            step={1}
+            marks={[
+              {value: 1, label: '1 km'},
+              {value: 10, label: '10 km'},
+              {value: 20, label: '20 km'},
+              {value: 30, label: '30 km'},
+            ]}
+            min={1}
+            max={30}
+            size={"small"}
+            valueLabelFormat={(value) => `${value} km`}
+            className={"RegisterForm-slider"}
+          />
+        </Grid>
       </Grid>
       <Button variant="outlined" type="submit">
         Registrarse

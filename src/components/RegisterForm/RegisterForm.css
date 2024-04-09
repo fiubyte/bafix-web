@@ -18,3 +18,8 @@
 .RegisterForm-required {
   color: red;
 }
+
+.RegisterForm-slider {
+  width: 90%;
+  margin-left: 1rem;
+}
