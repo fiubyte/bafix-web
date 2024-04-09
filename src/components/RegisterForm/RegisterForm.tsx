@@ -68,6 +68,7 @@ const RegisterForm = () => {
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
             className={"RegisterForm-input"}
+            size="small"
           />
         </Grid>
         <Grid item xs={4}>
@@ -81,6 +82,7 @@ const RegisterForm = () => {
             error={formik.touched.surname && Boolean(formik.errors.surname)}
             helperText={formik.touched.surname && formik.errors.surname}
             className={"RegisterForm-input"}
+            size="small"
           />
         </Grid>
         <Grid item xs={4}>
@@ -94,6 +96,7 @@ const RegisterForm = () => {
             error={formik.touched.document_number && Boolean(formik.errors.document_number)}
             helperText={formik.touched.document_number && formik.errors.document_number}
             className={"RegisterForm-input"}
+            size="small"
           />
         </Grid>
         <Grid item xs={4}>
@@ -107,6 +110,7 @@ const RegisterForm = () => {
             error={formik.touched.street && Boolean(formik.errors.street)}
             helperText={formik.touched.street && formik.errors.street}
             className={"RegisterForm-input"}
+            size="small"
           />
         </Grid>
         <Grid item xs={4}>
@@ -120,6 +124,7 @@ const RegisterForm = () => {
             error={formik.touched.street_number && Boolean(formik.errors.street_number)}
             helperText={formik.touched.street_number && formik.errors.street_number}
             className={"RegisterForm-input"}
+            size="small"
           />
         </Grid>
         <Grid item xs={4}>
@@ -133,6 +138,7 @@ const RegisterForm = () => {
             error={formik.touched.postal_code && Boolean(formik.errors.postal_code)}
             helperText={formik.touched.postal_code && formik.errors.postal_code}
             className={"RegisterForm-input"}
+            size="small"
           />
         </Grid>
         <Grid item xs={4}>
@@ -146,6 +152,7 @@ const RegisterForm = () => {
             error={formik.touched.phone_number && Boolean(formik.errors.phone_number)}
             helperText={formik.touched.phone_number && formik.errors.phone_number}
             className={"RegisterForm-input"}
+            size="small"
           />
         </Grid>
       </Grid>
@@ -162,6 +169,7 @@ const RegisterForm = () => {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
             className={"RegisterForm-input"}
+            size="small"
           />
         </Grid>
         <Grid item xs={8}></Grid>
@@ -176,6 +184,7 @@ const RegisterForm = () => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
             className={"RegisterForm-input"}
+            size="small"
           />
         </Grid>
         <Grid item xs={4}>
@@ -189,6 +198,7 @@ const RegisterForm = () => {
             error={formik.touched.password2 && Boolean(formik.errors.password2)}
             helperText={formik.touched.password2 && formik.errors.password2}
             className={"RegisterForm-input"}
+            size="small"
           />
         </Grid>
       </Grid>
@@ -205,6 +215,7 @@ const RegisterForm = () => {
             error={formik.touched.profile_photo_url && Boolean(formik.errors.profile_photo_url)}
             helperText={formik.touched.profile_photo_url && formik.errors.profile_photo_url}
             className={"RegisterForm-input"}
+            size="small"
           />
         </Grid>
       </Grid>
