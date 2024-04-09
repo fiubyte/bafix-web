@@ -144,8 +144,8 @@ const RegisterForm = (): JSX.Element => {
           />
         </Grid>
       </Grid>
-      <Button variant="outlined" type="submit">
-        Registrarse
+      <Button variant="contained" type="submit" className={"RegisterForm-button"}>
+        Finalizar registro
       </Button>
     </form>
   );
