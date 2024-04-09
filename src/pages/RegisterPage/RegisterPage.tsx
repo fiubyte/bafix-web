@@ -5,7 +5,9 @@ import "./RegisterPage.css";
 const RegisterPage = () => {
   return (
     <Box className={"RegisterPage"}>
-      <Typography variant={"h3"} className={"RegisterPage-title"}>¡Unite a BAFix!</Typography>
+      <Box>
+        <Typography variant={"h3"} className={"RegisterPage-title"}>Formulario de registro</Typography>
+      </Box>
       <RegisterForm/>
     </Box>
   );

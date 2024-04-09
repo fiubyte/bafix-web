@@ -5,6 +5,9 @@ const mainTheme = createTheme({
     h1: {
       fontWeight: "bold",
     },
+    h3: {
+      fontFamily: "DM Sans, sans-serif",
+    }
   }
 });
 
