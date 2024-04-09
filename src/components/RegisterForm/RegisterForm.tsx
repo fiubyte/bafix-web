@@ -4,6 +4,7 @@ import {Button, Grid, TextField, Typography} from '@mui/material';
 import axios from 'axios';
 import config from '../../config';
 import * as Yup from 'yup';
+import React from "react";
 
 interface RegisterValues {
   email: string;
@@ -77,18 +78,22 @@ const RegisterForm = (): JSX.Element => {
     label: string,
     name: keyof RegisterValues,
     type: string = 'text'
-  ): JSX.Element => (
+  ): React.ReactNode => (
     <Grid item xs={4}>
+      <Typography variant="body1" component="label">
+        {label} <span className={"RegisterForm-required"}> *</span>
+      </Typography>
       <TextField
-        label={label}
+        fullWidth
         variant="outlined"
         type={type}
         name={name}
         value={formik.values[name]}
         onChange={formik.handleChange}
         error={formik.touched[name] && Boolean(formik.errors[name])}
-        helperText={formik.touched[name] && formik.errors[name]}
-        className="RegisterForm-input"
+        helperText={
+          formik.touched[name] && formik.errors[name] ? formik.errors[name] : ' '
+        }
         size="small"
       />
     </Grid>
@@ -97,7 +102,7 @@ const RegisterForm = (): JSX.Element => {
   return (
     <form onSubmit={formik.handleSubmit} className="RegisterForm" noValidate autoComplete="off">
       <Typography variant="h3">Datos personales</Typography>
-      <Grid container className="RegisterForm-grid">
+      <Grid container className="RegisterForm-grid" columnSpacing={4}>
         {renderTextField('Nombre', 'name')}
         {renderTextField('Apellido', 'surname')}
         {renderTextField('DNI', 'document_number')}
@@ -107,14 +112,14 @@ const RegisterForm = (): JSX.Element => {
         {renderTextField('Teléfono', 'phone_number')}
       </Grid>
       <Typography variant="h3">Cuenta de inicio de sesión</Typography>
-      <Grid container className="RegisterForm-grid">
+      <Grid container className="RegisterForm-grid" columnSpacing={4}>
         {renderTextField('Email', 'email', 'email')}
-        <Grid item xs={4}></Grid>
+        <Grid item xs={8}></Grid>
         {renderTextField('Contraseña', 'password', 'password')}
         {renderTextField('Repetir contraseña', 'password2', 'password')}
       </Grid>
       <Typography variant="h3">Configuración de perfil</Typography>
-      <Grid container className="RegisterForm-grid">
+      <Grid container className="RegisterForm-grid" columnSpacing={4}>
         {renderTextField('Link de la foto de perfil', 'profile_photo_url')}
       </Grid>
       <Button variant="outlined" type="submit">

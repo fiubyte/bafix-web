@@ -6,11 +6,15 @@
 
 .RegisterForm-input {
   margin-bottom: 1.5rem;
-  min-width: 20rem;
+  min-width: 1rem;
 }
 
 .RegisterForm-grid {
   max-width: 70rem;
   margin-top: 1rem;
-  margin-left: 2rem;
+  margin-left: 1rem;
+}
+
+.RegisterForm-required {
+  color: red;
 }
