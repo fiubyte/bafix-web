@@ -5,10 +5,12 @@ import "./RegisterPage.css";
 const RegisterPage = () => {
   return (
     <Box className={"RegisterPage"}>
-      <Box>
-        <Typography variant={"h3"} className={"RegisterPage-title"}>Formulario de registro</Typography>
+      <Box className={"RegisterPage-banner"}>
+        <Typography variant={"h2"} className={"RegisterPage-title"}>Formulario de registro</Typography>
       </Box>
-      <RegisterForm/>
+      <Box className={"RegisterPage-form"}>
+        <RegisterForm/>
+      </Box>
     </Box>
   );
 }

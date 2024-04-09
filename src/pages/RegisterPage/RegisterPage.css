@@ -6,5 +6,16 @@
 }
 
 .RegisterPage-title {
-  margin: 2rem 0;
+  font-size: 2rem;
+  margin-left: 1rem;
+}
+
+.RegisterPage-banner {
+  width: 100%;
+  background-color: #FEE94C;
+  padding: 0.7rem;
+}
+
+.RegisterPage-form {
+  margin-top: 2rem;
 }
