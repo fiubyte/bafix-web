@@ -1,0 +1,20 @@
+.RegisterPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.RegisterPage-title {
+  margin-left: 2rem;
+}
+
+.RegisterPage-banner {
+  width: 100%;
+  background-color: #FEE94C;
+  padding: 0.7rem;
+}
+
+.RegisterPage-form {
+  margin-top: 2rem;
+  margin-left: 4rem;
+}

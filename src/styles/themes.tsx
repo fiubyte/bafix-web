@@ -1,17 +1,23 @@
 import {createTheme} from "@mui/material";
 
 const mainTheme = createTheme({
-  palette: {
-    primary: {
-      main: '#ffffff',
-    },
-    background: {
-      default: '#000000',
-    }
-  },
   typography: {
     h1: {
       fontWeight: "bold",
+      fontFamily: "DM Sans, sans-serif",
+    },
+    h2: {
+      fontWeight: "bold",
+      fontFamily: "DM Sans, sans-serif",
+      fontSize: "2rem",
+    },
+    h3: {
+      fontFamily: "DM Sans, sans-serif",
+      fontSize: "1.5rem",
+    },
+    body1: {
+      fontFamily: "DM Sans, sans-serif",
+      fontSize: "1rem",
     },
   }
 });

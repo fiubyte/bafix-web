@@ -1,0 +1,39 @@
+.RegisterForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.RegisterForm-input {
+  margin-bottom: 1.5rem;
+  min-width: 1rem;
+}
+
+.RegisterForm-grid {
+  max-width: 70rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.RegisterForm-required {
+  color: red;
+}
+
+.RegisterForm-slider {
+  width: 90%;
+  margin-left: 1rem;
+}
+
+.RegisterForm-button {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  margin-top: 3rem;
+  max-width: 12rem;
+  border-radius: 2rem;
+}
+
+.RegisterForm-button:hover {
+  background-color: yellow;
+  color: black;
+}
