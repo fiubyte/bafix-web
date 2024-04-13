@@ -3,6 +3,8 @@ import {StyledEngineProvider, ThemeProvider} from "@mui/material";
 import mainTheme from "./styles/themes";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import SignInOrRegisterPage from "./pages/SignInOrRegisterPage/SignInOrRegisterPage";
+import MyServicesPage from "./pages/MyServicesPage/MyServicesPage";
+import AddServicePage from "./pages/AddServicePage/AddServicePage";
 
 function App() {
   return (
@@ -11,7 +13,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path={'/'} Component={SignInOrRegisterPage}/>
-            <Route path={'/register'} Component={RegisterPage}/>
+            <Route path={'/registro'} Component={RegisterPage}/>
+            <Route path={'/mis-servicios'} Component={MyServicesPage}/>
+            <Route path={'/agregar-servicio'} Component={AddServicePage}/>
           </Routes>
         </BrowserRouter>
       </StyledEngineProvider>

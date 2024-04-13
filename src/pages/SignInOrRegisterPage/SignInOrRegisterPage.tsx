@@ -10,7 +10,7 @@ const SignInOrRegisterPage = () => {
         <Button variant="outlined" color="primary" onClick={() => {
         }} className={"SignInOrRegisterPage-signin-button"}>Iniciar sesión</Button>
         <Button variant="outlined" color="primary"
-                onClick={() => {navigate("/register")}}
+                onClick={() => {navigate("/registro")}}
                 className={"SignInOrRegisterPage-register-button"}>Registrarse</Button>
       </Box>
     </Box>

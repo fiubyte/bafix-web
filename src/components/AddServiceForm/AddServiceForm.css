@@ -1,0 +1,31 @@
+.AddServiceForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.AddServiceForm-required {
+  color: red;
+}
+
+.AddServiceForm-text-field {
+  max-width: 40rem;
+}
+
+.AddServiceForm-select-container {
+  max-width: 63rem;
+}
+
+.AddServiceForm-button {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  margin-top: 3rem;
+  max-width: 12rem;
+  border-radius: 2rem;
+}
+
+.AddServiceForm-button:hover {
+  background-color: yellow;
+  color: black;
+}
