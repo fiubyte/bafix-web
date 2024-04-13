@@ -6,6 +6,10 @@ import config from '../../config';
 import * as Yup from 'yup';
 import React from "react";
 
+type RegisterFormProps = {
+  handleSubmitError: () => void;
+}
+
 interface RegisterValues {
   email: string;
   password: string;
@@ -21,7 +25,7 @@ interface RegisterValues {
   profile_photo_url: string;
 }
 
-const RegisterForm = (): JSX.Element => {
+const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
   const validationSchema = Yup.object({
     email: Yup.string().email('Email inválido').required('Campo requerido'),
     password: Yup.string().required('Campo requerido'),
@@ -66,6 +70,7 @@ const RegisterForm = (): JSX.Element => {
         );
         console.log('User created successfully', response.data);
       } catch (error) {
+        handleSubmitError();
         console.error('Error creating user', error);
       }
     },
