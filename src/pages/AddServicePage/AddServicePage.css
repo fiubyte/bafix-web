@@ -1,0 +1,16 @@
+.AddServicePage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.AddServicePage-title {
+  margin-left: 2rem;
+}
+
+.AddServicePage-banner {
+  width: 100%;
+  background-color: #FEE94C;
+  padding: 0.7rem;
+  margin-top: 1rem;
+}
