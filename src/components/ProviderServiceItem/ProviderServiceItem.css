@@ -23,3 +23,25 @@
 .ProviderServiceItem-category {
   color: #434147;
 }
+
+.ProviderServiceItem-approved {
+  display: flex;
+  border-radius: 1.5rem;
+  border: 2px solid #909090;
+  background-color: #7DD891;
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 8rem;
+}
+
+.ProviderServiceItem-pendent {
+  display: flex;
+  border-radius: 1.5rem;
+  border: 2px solid #909090;
+  background-color: #FAB1A1;
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 16rem;
+}

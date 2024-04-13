@@ -12,13 +12,31 @@ const MyServicesPage = () => {
 
   const services = [
     {
-      title: "Servicio 1",
-      service_category: {
-        id: 0,
-        title: "Categoría 1",
-        description: "Descripción de la categoría 1",
+      "title": "Servicio de Plomería",
+      "service_category": {
+        "id": 0,
+        "title": "Plomería",
+        "description": "Servicios de fontanería y reparación de tuberías."
       },
-      approved: true,
+      "approved": true
+    },
+    {
+      "title": "Servicio de Jardinería",
+      "service_category": {
+        "id": 1,
+        "title": "Jardinería",
+        "description": "Diseño, mantenimiento y cuidado de jardines."
+      },
+      "approved": false
+    },
+    {
+      "title": "Servicio de Electricidad",
+      "service_category": {
+        "id": 2,
+        "title": "Electricidad",
+        "description": "Instalación y reparación de sistemas eléctricos."
+      },
+      "approved": true
     }
   ];
 

@@ -23,9 +23,15 @@ const ProviderServiceItem = ({service}: ProviderServiceItemProps) => {
           <span className={"ProviderServiceItem-title"}>{service.title}</span>
           <span className={"ProviderServiceItem-category"}> • {service.service_category.title}</span></Typography>
       </Box>
-      <Box className={"ProviderServiceItem-approved"}>
-        <Typography variant={"body1"}>{service.approved ? "Aprobado" : "Pendiente de aprobación"}</Typography>
-      </Box>
+      {service.approved ? (
+        <Box className={"ProviderServiceItem-approved"}>
+          <Typography variant={"body1"}>APROBADO</Typography>
+        </Box>
+      ) : (
+        <Box className={"ProviderServiceItem-pendent"}>
+          <Typography variant={"body1"}>PENDIENTE DE APROBACIÓN</Typography>
+        </Box>
+      )}
     </Box>
   )
 }
