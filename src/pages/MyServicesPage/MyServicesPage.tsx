@@ -4,10 +4,23 @@ import React from "react";
 import AddIcon from '@mui/icons-material/Add';
 import './MyServicesPage.css';
 import {useNavigate} from "react-router-dom";
+import ProviderServiceItem from "../../components/ProviderServiceItem/ProviderServiceItem";
 
 const MyServicesPage = () => {
 
   const navigate = useNavigate();
+
+  const services = [
+    {
+      title: "Servicio 1",
+      service_category: {
+        id: 0,
+        title: "Categoría 1",
+        description: "Descripción de la categoría 1",
+      },
+      approved: true,
+    }
+  ];
 
   return (
     <Box className={"MyServicesPage"}>
@@ -21,6 +34,9 @@ const MyServicesPage = () => {
         }}>
           Agregar un nuevo servicio
         </Button>
+      </Box>
+      <Box className={"MyServicesPage-services"}>
+        {services.map((service) => (<ProviderServiceItem service={service}/>))}
       </Box>
     </Box>
   )
