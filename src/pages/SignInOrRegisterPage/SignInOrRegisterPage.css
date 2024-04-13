@@ -1,0 +1,43 @@
+.SignInOrRegisterPage {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  background-color: black;
+}
+
+.SignInOrRegisterPage-button-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.SignInOrRegisterPage-register-button {
+  background-color: white;
+  color: black;
+  max-width: 12rem;
+  border-radius: 2rem;
+  border: white solid 0.08rem;
+  margin-top: 1rem;
+}
+
+.SignInOrRegisterPage-register-button:hover {
+  background-color: yellow;
+  color: black;
+  border: black solid 0.08rem;
+}
+
+.SignInOrRegisterPage-signin-button {
+  background-color: black;
+  color: white;
+  max-width: 12rem;
+  border-radius: 2rem;
+  border: white solid 0.08rem;
+}
+
+.SignInOrRegisterPage-signin-button:hover {
+  background-color: yellow;
+  color: black;
+  border: black solid 0.08rem;
+}
