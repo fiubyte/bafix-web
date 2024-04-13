@@ -1,0 +1,25 @@
+.ProviderServiceItem {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  padding: 1rem;
+  border: 2px solid #909090;
+  border-radius: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.ProviderServiceItem-title-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.ProviderServiceItem-title {
+  color: #4386DF;
+  font-weight: bold;
+}
+
+.ProviderServiceItem-category {
+  color: #434147;
+}
