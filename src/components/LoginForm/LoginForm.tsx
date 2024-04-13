@@ -4,6 +4,8 @@ import {useFormik} from "formik";
 import {Button, TextField, Typography} from "@mui/material";
 import React from "react";
 import axios from "axios";
+import config from "../../config";
+import {useNavigate} from "react-router-dom";
 
 type LoginFormProps = {
   handleSubmitError: () => void;
@@ -16,10 +18,12 @@ interface LoginValues {
 
 const LoginForm = ({handleSubmitError}: LoginFormProps) => {
 
-  const validationSchema = Yup.object({
-    email: Yup.string().email('Email inválido').required('Campo requerido'),
-    password: Yup.string().required('Campo requerido')
-  });
+    const navigate = useNavigate();
+
+    const validationSchema = Yup.object({
+        email: Yup.string().email('Email inválido').required('Campo requerido'),
+        password: Yup.string().required('Campo requerido')
+    });
 
   const formik = useFormik<LoginValues>({
     initialValues: {
@@ -28,9 +32,15 @@ const LoginForm = ({handleSubmitError}: LoginFormProps) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      axios.post(`${process.env.REACT_APP_API_URL}/auth/login/`, values).then(
+      axios.post(`${config.apiUrl}/auth/login/`, values).then(
         (response) => {
-          console.log(response);
+            console.log('Login successful. Obtained JWT: ' + response.data.token)
+            localStorage.setItem(config.LOCAL_STORAGE_JWT_KEY, response.data.token);
+            if (window.location.href.includes('admin')) {
+                navigate('/admin/home')
+            } else {
+                navigate('/mis-servicios')
+            }
         }
       ).catch(
         (error) => {

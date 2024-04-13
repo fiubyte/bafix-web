@@ -1,3 +1,4 @@
 # bafix-web
 
-Initial commit
+## Usage
+- npm run start

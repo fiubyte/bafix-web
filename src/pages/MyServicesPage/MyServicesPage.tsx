@@ -15,14 +15,16 @@ const MyServicesPage = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios.get(`${config.apiUrl}/services/?mine=true`).then((response) => {
-      setServices(response.data);
-    }).catch((error) => {
-      console.error(error);
-      setServiceError(true);
-    });
-  }, []);
+    useEffect(() => {
+        axios.get(`${config.apiUrl}/services/?mine=true`,
+            {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
+            .then((response) => {
+                setServices(response.data);
+            }).catch((error) => {
+            console.error(error);
+            setServiceError(true);
+        });
+    }, []);
 
   return (
     <Box className={"MyServicesPage"}>

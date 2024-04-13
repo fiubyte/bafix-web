@@ -6,6 +6,7 @@ import SignInOrRegisterPage from "./pages/SignInOrRegisterPage/SignInOrRegisterP
 import MyServicesPage from "./pages/MyServicesPage/MyServicesPage";
 import AddServicePage from "./pages/AddServicePage/AddServicePage";
 import AdminLoginPage from "./pages/AdminLoginPage/AdminLoginPage";
+import AdminHomePage from "./pages/AdminHomePage/AdminHomePage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path={'/mis-servicios'} Component={MyServicesPage}/>
             <Route path={'/agregar-servicio'} Component={AddServicePage}/>
             <Route path={'/admin'} Component={AdminLoginPage}/>
+            <Route path={'/admin/home'} Component={AdminHomePage}/>
           </Routes>
         </BrowserRouter>
       </StyledEngineProvider>
