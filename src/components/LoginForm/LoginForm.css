@@ -1,0 +1,27 @@
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  border-radius: 1.5rem;
+  padding: 2rem;
+}
+
+.LoginForm-text-field {
+  max-width: 20rem;
+}
+
+.LoginForm-button {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  border-radius: 2rem;
+  max-width: 7rem;
+  align-self: center;
+}
+
+.LoginForm-button:hover {
+  background-color: yellow;
+  color: black;
+}

@@ -1,0 +1,24 @@
+.AdminLoginPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: black;
+}
+
+.AdminLoginPage-error {
+  background-color: #FFDFDF;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 15rem;
+  margin-bottom: 1rem;
+}
+
+.AdminLoginPage-error-message {
+  color: #A73232;
+}
