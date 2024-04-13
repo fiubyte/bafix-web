@@ -27,7 +27,7 @@ const RegisterPage = () => {
       </Box>
       <Snackbar
         open={openErrorSnackBar}
-        autoHideDuration={3000}
+        autoHideDuration={5000}
         onClose={handleClose}
         message="Error al registrarse, intentelo nuevamente."
       />
