@@ -8,37 +8,8 @@ import ProviderServiceItem from "../../components/ProviderServiceItem/ProviderSe
 
 const MyServicesPage = () => {
 
+  const [services, setServices] = React.useState([]);
   const navigate = useNavigate();
-
-  const services = [
-    {
-      "title": "Servicio de Plomería",
-      "service_category": {
-        "id": 0,
-        "title": "Plomería",
-        "description": "Servicios de fontanería y reparación de tuberías."
-      },
-      "approved": true
-    },
-    {
-      "title": "Servicio de Jardinería",
-      "service_category": {
-        "id": 1,
-        "title": "Jardinería",
-        "description": "Diseño, mantenimiento y cuidado de jardines."
-      },
-      "approved": false
-    },
-    {
-      "title": "Servicio de Electricidad",
-      "service_category": {
-        "id": 2,
-        "title": "Electricidad",
-        "description": "Instalación y reparación de sistemas eléctricos."
-      },
-      "approved": true
-    }
-  ];
 
   return (
     <Box className={"MyServicesPage"}>
@@ -55,6 +26,9 @@ const MyServicesPage = () => {
       </Box>
       <Box className={"MyServicesPage-services"}>
         {services.map((service) => (<ProviderServiceItem service={service}/>))}
+        {services.length === 0 && (
+          <Typography variant={"body1"} className={"MyServicesPage-no-services"}>No hay servicios registrados</Typography>
+        )}
       </Box>
     </Box>
   )
