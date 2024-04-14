@@ -1,0 +1,40 @@
+.AdminHomePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.AdminHomePage-banner {
+    width: 100%;
+    background-color: #FEE94C;
+    padding: 0.7rem;
+    margin-top: 1rem;
+}
+
+.AdminHomePage-title {
+    margin-left: 2rem;
+}
+
+.AdminHomePage-services {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.AdminHomePage-no-services {
+    color: black;
+    align-self: flex-start;
+    margin-left: 5rem;
+}
+
+.AdminHomePage-service-error {
+    color: red;
+    align-self: flex-start;
+    margin-left: 5rem;
+}
+
+.AdminHomePage-service-detail {
+
+}

@@ -1,23 +1,21 @@
 import {Box, Typography} from "@mui/material";
 import "./ProviderServiceItem.css";
-
-type Service = {
-  title: string;
-  service_category: {
-    id: number;
-    title: string;
-    description: string;
-  };
-  approved: boolean;
-}
+import {useNavigate} from "react-router-dom";
+import {Service} from "../../models/Service";
 
 type ProviderServiceItemProps = {
   service: Service;
 }
 
 const ProviderServiceItem = ({service}: ProviderServiceItemProps) => {
+  const navigate = useNavigate();
+
   return (
-    <Box className={"ProviderServiceItem"}>
+    <Box className={"ProviderServiceItem"} onClick={() => {
+      if (window.location.href.includes('admin')) {
+        navigate(`/admin/servicio/${service.id}/detalle`);
+      }
+    }}>
       <Box className={"ProviderServiceItem-title-container"}>
         <Typography variant={"h3"}>
           <span className={"ProviderServiceItem-title"}>{service.title}</span>

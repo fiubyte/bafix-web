@@ -5,6 +5,7 @@ import {Button, Grid, MenuItem, Select, TextField, Typography} from "@mui/materi
 import './AddServiceForm.css';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import config from "../../config";
 
 type ServiceCategory = {
   id: number;
@@ -37,25 +38,27 @@ const AddServiceForm = ({handleSubmitError, categories}: AddServiceFormProps) =>
     description: Yup.string().required('Campo requerido'),
   });
 
-  const handleSubmit = (values: AddServiceValues) => {
-    const updatedValues = {
-      ...values,
-      availability_days: values.availability_days.join(',')
-    };
+    const handleSubmit = (values: AddServiceValues) => {
+        const updatedValues = {
+            ...values,
+            availability_days: values.availability_days.join(',')
+        };
 
-    console.log(updatedValues);
-    axios.post(`${process.env.REACT_APP_API_URL}/services/`, updatedValues).then(
-      (response) => {
-        console.log(response);
-        navigate('/services');
-      }
-    ).catch(
-      (error) => {
-        console.log(error);
-        handleSubmitError();
-      }
-    )
-  }
+        console.log(updatedValues);
+        axios.post(`${process.env.REACT_APP_API_URL}/services/`, updatedValues,
+            {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
+            .then(
+                (response) => {
+                    console.log(response);
+                    navigate('/services');
+                }
+            ).catch(
+            (error) => {
+                console.log(error);
+                handleSubmitError();
+            }
+        )
+    }
 
   const formik = useFormik<AddServiceValues>({
     initialValues: {
