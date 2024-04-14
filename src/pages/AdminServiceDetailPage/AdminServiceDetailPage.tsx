@@ -10,9 +10,10 @@ import {Service} from "../../models/Service";
 const AdminServiceDetailPage = () => {
 
   const [service, setService] = React.useState<Service>();
-  const [_servicesLoaded, setServiceLoaded] = React.useState(false);
+  const [_serviceLoaded, setServiceLoaded] = React.useState(false);
   const [serviceError, setServiceError] = React.useState(false);
   const {id} = useParams();
+  const [fetchService, setFetchService] = React.useState(false);
 
   useEffect(() => {
     console.log("Received Service ID: " + id)
@@ -27,7 +28,7 @@ const AdminServiceDetailPage = () => {
       console.error(error);
       setServiceError(true);
     });
-  }, [id]);
+  }, [id, fetchService]);
 
 
   const approveUser = async (userId: number) => {
@@ -39,13 +40,34 @@ const AdminServiceDetailPage = () => {
     ).catch(
       (error) => {
         console.log(error);
+        setServiceError(true);
       }
     )
   };
 
+  const approveService = async (serviceId: number) => {
+    axios.post(`${config.apiUrl}/services/${serviceId}/approve/`, null, {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}}).then(
+      (response) => {
+        console.log("Service approved");
+        console.log(response);
+        setFetchService(!fetchService);
+      }
+    ).catch(
+      (error) => {
+        console.log(error);
+        setServiceError(true);
+      }
+    )
+  }
+
   const handleApproveUser = (userId: number) => {
     console.log("User id to approve: " + userId)
     approveUser(userId).then(_ => console.log("User approved"));
+  };
+
+  const handleApproveService = (serviceId: number) => {
+    console.log("Service id to approve: " + serviceId)
+    approveService(serviceId).then(_ => console.log("Service approved"));
   };
 
   return (
@@ -131,7 +153,8 @@ const AdminServiceDetailPage = () => {
               <Typography variant={"body1"}>{service?.availability_days.replace(/,/g, ', ')}</Typography>
             </Grid>
             <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
-              <Typography variant={"body1"}>{service?.availability_time_start} - {service?.availability_time_end}</Typography>
+              <Typography
+                variant={"body1"}>{service?.availability_time_start} - {service?.availability_time_end}</Typography>
             </Grid>
             <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
               <Typography variant={"body1"}>{service?.user.max_radius} km</Typography>
@@ -145,7 +168,7 @@ const AdminServiceDetailPage = () => {
               {!service?.approved && (
                 <Button
                   className={"AdminServiceDetailPage-validate-button"}
-                  onClick={() => handleApproveUser(service?.id)}>VALIDAR SERVICIO</Button>
+                  onClick={() => handleApproveService(service?.id)}>VALIDAR SERVICIO</Button>
               )}
             </Grid>
           </Grid>
