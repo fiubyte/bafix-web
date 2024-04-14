@@ -7,8 +7,9 @@ const SignInOrRegisterPage = () => {
   return (
     <Box className={"SignInOrRegisterPage"}>
       <Box className={"SignInOrRegisterPage-button-container"}>
-        <Button variant="outlined" color="primary" onClick={() => {
-        }} className={"SignInOrRegisterPage-signin-button"}>Iniciar sesión</Button>
+        <Button variant="outlined" color="primary"
+                onClick={() => {navigate("/iniciar-sesion")}}
+                className={"SignInOrRegisterPage-signin-button"}>Iniciar sesión</Button>
         <Button variant="outlined" color="primary"
                 onClick={() => {navigate("/registro")}}
                 className={"SignInOrRegisterPage-register-button"}>Registrarse</Button>
