@@ -5,6 +5,9 @@ import axios from 'axios';
 import config from '../../config';
 import * as Yup from 'yup';
 import React from "react";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 type RegisterFormProps = {
   handleSubmitError: () => void;
@@ -26,9 +29,12 @@ interface RegisterValues {
 }
 
 const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
+  const navigate = useNavigate();
   const validationSchema = Yup.object({
     email: Yup.string().email('Email inválido').required('Campo requerido'),
-    password: Yup.string().required('Campo requerido'),
+    password: Yup.string()
+      .min(6, 'La contraseña debe tener al menos 6 caracteres')
+      .required('Campo requerido'),
     password2: Yup.string()
       .oneOf([Yup.ref('password')], 'Las contraseñas deben coincidir')
       .required('Campo requerido'),
@@ -48,30 +54,37 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
 
   const formik = useFormik<RegisterValues>({
     initialValues: {
-      email: '',
-      password: '',
-      password2: '',
-      name: '',
-      surname: '',
-      document_number: '',
-      street: '',
-      street_number: '',
-      postal_code: '',
-      phone_number: '',
-      max_radius: 0,
-      profile_photo_url: '',
+      email: 'user6@mail.com',
+      password: 'admin1',
+      password2: 'admin1',
+      name: 'carlos',
+      surname: 'perez',
+      document_number: '1111111',
+      street: 'thames',
+      street_number: '1234',
+      postal_code: '1111',
+      phone_number: '1111111111',
+      max_radius: 14,
+      profile_photo_url: 'foto.jpg',
     },
     onSubmit: async (values) => {
       try {
-        console.log('Register form submitted:', values);
-        const response = await axios.post<RegisterValues>(
-          `${config.apiUrl}/users/`,
-          values
-        );
-        console.log('User created successfully', response.data);
+        const response = await axios.post(`${config.apiUrl}/users/`, values);
+        console.log('User created successfully:', response.data);
+        toast.success('Registro exitoso! Bienvenido/a a la plataforma.');
+        navigate('/mis-servicios');
       } catch (error) {
-        handleSubmitError();
-        console.error('Error creating user', error);
+        console.error('Error creating user:', error);
+        
+        if (axios.isAxiosError(error) && error.response) {
+          if (error.response.status === 400 && error.response.data.detail === 'Email is taken') {
+            toast.error('El email ya está en uso. Por favor, utiliza otro email.');
+          } else {
+            toast.error('Error en el registro. Por favor, inténtalo de nuevo.');
+          }
+        } else {
+          toast.error('Error de conexión. Por favor, verifica tu conexión a internet.');
+        }
       }
     },
     validationSchema,
@@ -106,6 +119,7 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
 
   return (
     <form onSubmit={formik.handleSubmit} className="RegisterForm" noValidate autoComplete="off">
+      <ToastContainer position="bottom-center" autoClose={5000} hideProgressBar closeOnClick pauseOnHover draggable />
       <Typography variant="h3">Datos personales</Typography>
       <Grid container className="RegisterForm-grid" columnSpacing={4}>
         {renderTextField('Nombre', 'name')}
@@ -149,7 +163,7 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
           />
         </Grid>
       </Grid>
-      <Button variant="contained" type="submit" className={"RegisterForm-button"}>
+      <Button variant="contained" type="submit" className={"RegisterForm-button"}> 
         Finalizar registro
       </Button>
     </form>
