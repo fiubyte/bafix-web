@@ -22,8 +22,8 @@
     margin-bottom: 1rem;
 }
 
-.AdminServiceDetailPage-user {
-    margin: auto;
+.AdminServiceDetailPage-detail {
+    margin: auto auto 1.5rem;
     width: 90%;
     border-radius: 2rem;
     border: 2px solid #909090;
@@ -92,13 +92,14 @@
     font-weight: bold;
 }
 
-.AdminServiceDetailPage-validate-user-button {
-    width: 80%;
+.AdminServiceDetailPage-validate-button {
+    width: 15rem;
     border-radius: 2rem;
     border: 1px solid #909090;
     color: #434147;
+    align-self: flex-end;
 }
 
-.AdminServiceDetailPage-validated-button {
+.AdminServiceDetailPage-validated {
     background-color: #7DD891;
 }
