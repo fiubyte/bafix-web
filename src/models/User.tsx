@@ -12,5 +12,5 @@ export interface User {
     id: number;
     address_lat: string;
     address_long: string;
-    approved: boolean
+    approved: boolean;
 }

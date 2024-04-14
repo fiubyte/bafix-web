@@ -7,9 +7,10 @@
 .AdminServiceDetailPage-title {
     margin-left: 2rem;
     color: dodgerblue;
+    font-weight: bold;
 }
 .AdminServiceDetailPage-subtitle {
-    color: black;
+    color: #434147;
 }
 
 
@@ -24,8 +25,13 @@
 .AdminServiceDetailPage-user {
     margin: auto;
     width: 90%;
-    border-radius: 25px;
-    border: 3px solid black;
+    border-radius: 2rem;
+    border: 2px solid #909090;
+    padding: 0 2rem 2rem 2rem;
+}
+
+.AdminServiceDetailPage-category {
+    color: #909090;
 }
 
 .AdminServiceDetailPage-user-detail {
@@ -63,15 +69,36 @@
     height: 80px;
     border-radius: 10px;
     object-fit: cover;
+    margin-right: 1rem;
+}
+
+.AdminServiceDetailPage-image-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.AdminServiceDetailPage-data-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.AdminServiceDetailPage-dni-link {
+    color: #4386DF;
+    font-weight: bold;
 }
 
 .AdminServiceDetailPage-validate-user-button {
-    width: 80px;
-    height: 80px;
-    border-radius: 40px;
-    border: 2px solid black;
+    width: 80%;
+    border-radius: 2rem;
+    border: 1px solid #909090;
+    color: #434147;
 }
 
 .AdminServiceDetailPage-validated-button {
-    background-color: forestgreen;
+    background-color: #7DD891;
 }

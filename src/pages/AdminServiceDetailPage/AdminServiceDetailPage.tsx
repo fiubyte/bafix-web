@@ -1,4 +1,4 @@
-import {Box, Button, Link, Typography} from "@mui/material";
+import {Box, Button, Grid, Link, Typography} from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import React, {useEffect} from "react";
 import "./AdminServiceDetailPage.css";
@@ -61,68 +61,58 @@ const AdminServiceDetailPage = () => {
 
       {service && (
         <Box className={"AdminServiceDetailPage-banner"}>
-          <Typography variant={"h2"} display="inline"
+          <Typography variant={"h3"} display="inline"
                       className={"AdminServiceDetailPage-title"}>{service?.title} </Typography>
-          <Typography variant={"h2"} display="inline"
+          <Typography variant={"h3"} display="inline"
                       className={"AdminServiceDetailPage-subtitle"}>• {service?.service_category.title}</Typography>
         </Box>
       )}
 
       {service && (
-        <Box className={"AdminServiceDetailPage-user"}>
-          <Box className={"AdminServiceDetailPage-flex-row"}>
-            <Typography variant={"h4"}
-                        className={"AdminServiceDetailPage-flex-col"}>Proveedor/a</Typography>
-            <Typography variant={"h4"} className={"AdminServiceDetailPage-flex-col"}>DNI</Typography>
-            <Typography variant={"h4"} className={"AdminServiceDetailPage-flex-col"}>Validación de
-              identidad</Typography>
-            <Typography variant={"h4"} className={"AdminServiceDetailPage-flex-col"}></Typography>
-          </Box>
-          <Box className={"AdminServiceDetailPage-flex-row"}>
-            <Box className={"AdminServiceDetailPage-flex-col"}>
-              <Box className={"AdminServiceDetailPage-flex-row"}>
-                <Box className={"AdminServiceDetailPage-flex-col"}>
-                  <img className={"AdminServiceDetailPage-profile-image"}
-                       src={service?.user.profile_photo_url}
-                       alt={service?.user.name}/>
-                </Box>
-                <Box className={"AdminServiceDetailPage-flex-col"}>
-                  <Typography
-                    variant={"h6"}>{service?.user.name} {service?.user.surname}</Typography>
-                </Box>
-              </Box>
-            </Box>
-            <Typography variant={"h6"}
-                        className={"AdminServiceDetailPage-flex-col"}>{service?.user.document_number}</Typography>
-            {/*FIXME: obtain the document image*/}
-            <Typography variant={"h6"} className={"AdminServiceDetailPage-flex-col"}><Link
-              href={service?.user.profile_photo_url} target="_blank">Foto de DNI</Link></Typography>
+        <>
+          <Grid container className={"AdminServiceDetailPage-user"} rowSpacing={3}>
+            <Grid item xs={4}>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Proveedor/a</Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>DNI</Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Validación de
+                identidad</Typography>
+            </Grid>
+            <Grid item xs={3}/>
 
-            {service?.user.approved && (
-              <Button
-                className={"AdminServiceDetailPage-flex-col AdminServiceDetailPage-validate-user-button AdminServiceDetailPage-validated-button"}
-              >IDENTIDAD VALIDADA</Button>
-            )}
-            {!service?.user.approved && (
-              <Button
-                className={"AdminServiceDetailPage-flex-col AdminServiceDetailPage-validate-user-button"}
-                onClick={() => handleApproveUser(service?.user.id)}>VALIDAR IDENTIDAD</Button>
-            )}
-          </Box>
-        </Box>
+            <Grid item xs={4} className={"AdminServiceDetailPage-image-container"}>
+              <img className={"AdminServiceDetailPage-profile-image"}
+                   src={service?.user.profile_photo_url}
+                   alt={service?.user.name}/>
+              <Typography variant={"h4"}>{service?.user.name} {service?.user.surname}</Typography>
+            </Grid>
+            <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
+              <Typography variant={"h4"}>{service?.user.document_number}</Typography>
+            </Grid>
+            <Grid item xs={3} className={"AdminServiceDetailPage-data-container"}>
+              <Link href={service?.user.profile_photo_url}
+                    target="_blank"
+                    className={"AdminServiceDetailPage-dni-link"}
+                    variant={"h4"}>Foto de DNI</Link>
+            </Grid>
+            <Grid item xs={3} className={"AdminServiceDetailPage-data-container"}>
+              {service?.user.approved && (
+                <Button
+                  className={"AdminServiceDetailPage-validate-user-button AdminServiceDetailPage-validated-button"}
+                >IDENTIDAD VALIDADA</Button>
+              )}
+              {!service?.user.approved && (
+                <Button
+                  className={"AdminServiceDetailPage-validate-user-button"}
+                  onClick={() => handleApproveUser(service?.user.id)}>VALIDAR IDENTIDAD</Button>
+              )}
+            </Grid>
+          </Grid>
+        </>
       )}
-
-      {/*<Box className={"AdminServiceDetailPage-form"}>*/}
-      {/*  <AddServiceForm handleSubmitError={() => {*/}
-      {/*    setOpenErrorSnackBar(true);*/}
-      {/*  }} categories={categories}/>*/}
-      {/*</Box>*/}
-      {/*<Snackbar*/}
-      {/*  open={openErrorSnackBar}*/}
-      {/*  autoHideDuration={5000}*/}
-      {/*  onClose={handleClose}*/}
-      {/*  message="Error al agregar servicio, intentelo nuevamente."*/}
-      {/*/>*/}
     </Box>
   )
 }
