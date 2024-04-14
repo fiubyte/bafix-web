@@ -37,7 +37,7 @@ const LoginForm = ({handleSubmitError}: LoginFormProps) => {
             console.log('Login successful. Obtained JWT: ' + response.data.token)
             localStorage.setItem(config.LOCAL_STORAGE_JWT_KEY, response.data.token);
             if (window.location.href.includes('admin')) {
-                navigate('/admin/home')
+                navigate('/admin/inicio')
             } else {
                 navigate('/mis-servicios')
             }

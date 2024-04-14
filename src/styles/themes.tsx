@@ -15,6 +15,10 @@ const mainTheme = createTheme({
       fontFamily: "DM Sans, sans-serif",
       fontSize: "1.5rem",
     },
+    h4: {
+      fontFamily: "DM Sans, sans-serif",
+      fontSize: "1.2rem",
+    },
     body1: {
       fontFamily: "DM Sans, sans-serif",
       fontSize: "1rem",

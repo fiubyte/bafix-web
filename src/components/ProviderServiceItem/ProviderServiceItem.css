@@ -6,6 +6,7 @@
   border: 2px solid #909090;
   border-radius: 1.5rem;
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 .ProviderServiceItem-title-container {
