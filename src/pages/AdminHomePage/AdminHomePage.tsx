@@ -12,6 +12,7 @@ const AdminHomePage = () => {
 
     const [services, setServices] = React.useState<Service[]>([]);
     const [serviceError, setServiceError] = React.useState(false);
+    const [servicesLoaded, setServicesLoaded] = React.useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,6 +21,7 @@ const AdminHomePage = () => {
             .then((response) => {
                 const services: Service[] = response.data
                 setServices(services);
+                setServicesLoaded(true);
                 console.log(services)
             }).catch((error) => {
             console.error(error);
@@ -36,12 +38,15 @@ const AdminHomePage = () => {
             <Box className={"AdminHomePage-services"}>
                 {services.map((service) =>
                     (<div key={service.id} className={"AdminHomePage-service-detail"} onClick={() => {
-                        navigate("/registro") // TODO: redirect to service detail page for approval
+                        navigate(`/admin/servicio/${service.id}/detalle`) // TODO: redirect to service detail page for approval
                     }}>
                         <ProviderServiceItem service={service}/>
                     </div>))
                 }
-                {!serviceError && services.length === 0 && (
+                {!serviceError && !servicesLoaded && (
+                    <Typography variant={"body1"} className={"AdminHomePage-no-services"}>Cargando servicios...</Typography>
+                )}
+                {!serviceError && servicesLoaded && services.length === 0 && (
                     <Typography variant={"body1"} className={"AdminHomePage-no-services"}>No hay servicios
                         registrados</Typography>
                 )}

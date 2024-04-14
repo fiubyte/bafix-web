@@ -7,6 +7,7 @@ import MyServicesPage from "./pages/MyServicesPage/MyServicesPage";
 import AddServicePage from "./pages/AddServicePage/AddServicePage";
 import AdminLoginPage from "./pages/AdminLoginPage/AdminLoginPage";
 import AdminHomePage from "./pages/AdminHomePage/AdminHomePage";
+import AdminServiceDetailPage from "./pages/AdminServiceDetailPage/AdminServiceDetailPage";
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
             <Route path={'/mis-servicios'} Component={MyServicesPage}/>
             <Route path={'/agregar-servicio'} Component={AddServicePage}/>
             <Route path={'/admin'} Component={AdminLoginPage}/>
-            <Route path={'/admin/home'} Component={AdminHomePage}/>
+            <Route path={'/admin/inicio'} Component={AdminHomePage}/>
+            <Route path={'/admin/servicio/:id/detalle'} Component={AdminServiceDetailPage}/>
           </Routes>
         </BrowserRouter>
       </StyledEngineProvider>

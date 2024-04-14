@@ -1,0 +1,77 @@
+.AdminServiceDetailPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.AdminServiceDetailPage-title {
+    margin-left: 2rem;
+    color: dodgerblue;
+}
+.AdminServiceDetailPage-subtitle {
+    color: black;
+}
+
+
+.AdminServiceDetailPage-banner {
+    width: 100%;
+    /*background-color: #FEE94C;*/
+    padding: 0.7rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.AdminServiceDetailPage-user {
+    margin: auto;
+    width: 90%;
+    border-radius: 25px;
+    border: 3px solid black;
+}
+
+.AdminServiceDetailPage-user-detail {
+    display: flex;
+    flex-direction: row;
+}
+
+.AdminServiceDetailPage-service-error {
+    color: red;
+    align-self: flex-start;
+    margin-left: 5rem;
+}
+
+.AdminServiceDetailPage-flex-row {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.AdminServiceDetailPage-flex-col {
+    margin: 6px;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    flex-direction: column;
+    color: black;
+    box-sizing:border-box;
+}
+
+.AdminServiceDetailPage-profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.AdminServiceDetailPage-validate-user-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    border: 2px solid black;
+}
+
+.AdminServiceDetailPage-validated-button {
+    background-color: forestgreen;
+}
