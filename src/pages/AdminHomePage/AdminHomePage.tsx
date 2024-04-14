@@ -17,7 +17,8 @@ const AdminHomePage = () => {
         axios.get(`${config.apiUrl}/services`,
             {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
             .then((response) => {
-                const services: Service[] = response.data
+                let services: Service[] = response.data;
+                services = services.sort(function(a,b) {return (a.approved === b.approved)? 0 : a.approved? -1 : 1;} ).reverse();
                 setServices(services);
                 setServicesLoaded(true);
                 console.log(services)
