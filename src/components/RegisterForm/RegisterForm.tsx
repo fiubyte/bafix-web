@@ -5,9 +5,9 @@ import axios from 'axios';
 import config from '../../config';
 import * as Yup from 'yup';
 import React from "react";
-import { toast, ToastContainer } from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 type RegisterFormProps = {
   handleSubmitError: () => void;
@@ -54,44 +54,44 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
 
   const formik = useFormik<RegisterValues>({
     initialValues: {
-      email: 'user6@mail.com',
-      password: 'admin1',
-      password2: 'admin1',
-      name: 'carlos',
-      surname: 'perez',
-      document_number: '1111111',
-      street: 'thames',
-      street_number: '1234',
-      postal_code: '1111',
-      phone_number: '1111111111',
-      max_radius: 14,
-      profile_photo_url: 'foto.jpg',
+      email: '',
+      password: '',
+      password2: '',
+      name: '',
+      surname: '',
+      document_number: '',
+      street: '',
+      street_number: '',
+      postal_code: '',
+      phone_number: '',
+      max_radius: 5,
+      profile_photo_url: '',
     },
     onSubmit: async (values) => {
       try {
-       
+
         // Intento de crear un nuevo usuario
         const response = await axios.post(`${config.apiUrl}/users/`, values);
         console.log('User created successfully:', response.data);
-        toast.success('Registro exitoso! Bienvenido/a a la plataforma.', { autoClose: 5000 });
-    
+        toast.success('Registro exitoso! Bienvenido/a a la plataforma.', {autoClose: 5000});
+
         // Preparar datos de autenticación
         const loginData = {
           email: values.email,
           password: values.password,
           google_id_token: ""  // Asumiendo que no se utiliza autenticación de Google en este paso
         };
-    
+
         // Intento de autenticar al usuario y obtener el token JWT
         const loginResponse = await axios.post(`${config.apiUrl}/auth/login/`, loginData);
         console.log('Login successful. Obtained JWT:', loginResponse.data.token);
         localStorage.setItem(config.LOCAL_STORAGE_JWT_KEY, loginResponse.data.token);
-      
-          // Retraso antes de redirigir
+
+        // Retraso antes de redirigir
         setTimeout(() => navigate('/mis-servicios'), 2000);
       } catch (error) {
         console.error('Error creating user:', error);
-        
+
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.status === 400 && error.response.data.detail === 'Email is taken') {
             toast.error('El email ya está en uso. Por favor, utiliza otro email.');
@@ -135,7 +135,7 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
 
   return (
     <form onSubmit={formik.handleSubmit} className="RegisterForm" noValidate autoComplete="off">
-      <ToastContainer position="bottom-center" autoClose={5000} hideProgressBar closeOnClick pauseOnHover draggable />
+      <ToastContainer position="bottom-center" autoClose={5000} hideProgressBar closeOnClick pauseOnHover draggable/>
       <Typography variant="h3">Datos personales</Typography>
       <Grid container className="RegisterForm-grid" columnSpacing={4}>
         {renderTextField('Nombre', 'name')}
@@ -179,7 +179,7 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
           />
         </Grid>
       </Grid>
-      <Button variant="contained" type="submit" className={"RegisterForm-button"}> 
+      <Button variant="contained" type="submit" className={"RegisterForm-button"}>
         Finalizar registro
       </Button>
     </form>
