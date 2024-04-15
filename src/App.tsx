@@ -7,7 +7,9 @@ import MyServicesPage from "./pages/MyServicesPage/MyServicesPage";
 import AddServicePage from "./pages/AddServicePage/AddServicePage";
 import AdminLoginPage from "./pages/AdminLoginPage/AdminLoginPage";
 import AdminHomePage from "./pages/AdminHomePage/AdminHomePage";
+import ProviderLoginPage from "./pages/ProviderLoginPage/ProviderLoginPage";
 import AdminServiceDetailPage from "./pages/AdminServiceDetailPage/AdminServiceDetailPage";
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path={'/'} Component={SignInOrRegisterPage}/>
+            <Route path={'/iniciar-sesion'} Component={ProviderLoginPage}/>
             <Route path={'/registro'} Component={RegisterPage}/>
             <Route path={'/mis-servicios'} Component={MyServicesPage}/>
             <Route path={'/agregar-servicio'} Component={AddServicePage}/>
