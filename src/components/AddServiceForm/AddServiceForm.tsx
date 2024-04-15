@@ -45,7 +45,7 @@ const AddServiceForm = ({handleSubmitError, categories}: AddServiceFormProps) =>
     };
 
     console.log(updatedValues);
-    axios.post(`${process.env.REACT_APP_API_URL}/services/`, updatedValues,
+    axios.post(`${config.apiUrl}/services/`, updatedValues,
       {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
       .then(
         (response) => {

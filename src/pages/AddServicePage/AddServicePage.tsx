@@ -18,7 +18,7 @@ const AddServicePage = () => {
   ]);
 
   React.useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/service-categories/`,
+    axios.get(`${config.apiUrl}/service-categories/`,
       {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
       .then((response) => {
           setCategories(response.data);
