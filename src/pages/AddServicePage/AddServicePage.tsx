@@ -3,10 +3,31 @@ import Navbar from "../../components/Navbar/Navbar";
 import React from "react";
 import "./AddServicePage.css";
 import AddServiceForm from "../../components/AddServiceForm/AddServiceForm";
+import axios from "axios";
+import config from "../../config";
 
 const AddServicePage = () => {
 
   const [openErrorSnackBar, setOpenErrorSnackBar] = React.useState(false);
+  const [categories, setCategories] = React.useState([
+    {
+      id: 1,
+      title: "",
+      description: ""
+    }
+  ]);
+
+  React.useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URL}/service-categories/`,
+      {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
+      .then((response) => {
+          setCategories(response.data);
+        }
+      ).catch((error) => {
+      console.error(error);
+      setOpenErrorSnackBar(true);
+    })
+  }, []);
 
   const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
@@ -15,34 +36,6 @@ const AddServicePage = () => {
 
     setOpenErrorSnackBar(false);
   };
-
-  const categories = [
-    {
-      id: 0,
-      name: "Albañilería",
-      description: "Servicios de albañilería"
-    },
-    {
-      id: 1,
-      name: "Carpintería",
-      description: "Servicios de carpintería"
-    },
-    {
-      id: 2,
-      name: "Plomería",
-      description: "Servicios de plomería"
-    },
-    {
-      id: 3,
-      name: "Electricidad",
-      description: "Servicios de electricidad"
-    },
-    {
-      id: 4,
-      name: "Jardinería",
-      description: "Servicios de jardinería"
-    }
-  ];
 
   return (
     <Box className={"AddServicePage"}>

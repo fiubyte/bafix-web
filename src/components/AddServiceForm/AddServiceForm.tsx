@@ -9,7 +9,7 @@ import config from "../../config";
 
 type ServiceCategory = {
   id: number;
-  name: string;
+  title: string;
   description: string;
 }
 
@@ -38,31 +38,31 @@ const AddServiceForm = ({handleSubmitError, categories}: AddServiceFormProps) =>
     description: Yup.string().required('Campo requerido'),
   });
 
-    const handleSubmit = (values: AddServiceValues) => {
-        const updatedValues = {
-            ...values,
-            availability_days: values.availability_days.join(',')
-        };
+  const handleSubmit = (values: AddServiceValues) => {
+    const updatedValues = {
+      ...values,
+      availability_days: values.availability_days.join(',')
+    };
 
-        console.log(updatedValues);
-        axios.post(`${process.env.REACT_APP_API_URL}/services/`, updatedValues,
-            {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
-            .then(
-                (response) => {
-                    console.log(response);
-                    navigate('/services');
-                }
-            ).catch(
-            (error) => {
-                console.log(error);
-                handleSubmitError();
-            }
-        )
-    }
+    console.log(updatedValues);
+    axios.post(`${process.env.REACT_APP_API_URL}/services/`, updatedValues,
+      {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
+      .then(
+        (response) => {
+          console.log(response);
+          navigate('/mis-servicios');
+        }
+      ).catch(
+      (error) => {
+        console.log(error);
+        handleSubmitError();
+      }
+    )
+  }
 
   const formik = useFormik<AddServiceValues>({
     initialValues: {
-      service_category_id: 0,
+      service_category_id: 1,
       title: '',
       description: '',
       photo_url: '',
@@ -76,7 +76,7 @@ const AddServiceForm = ({handleSubmitError, categories}: AddServiceFormProps) =>
     validateOnBlur: true,
   });
 
-  const hours = Array.from({ length: 17 }, (_, index) => {
+  const hours = Array.from({length: 17}, (_, index) => {
     const hour = index + 6;
     return `${String(hour).padStart(2, '0')}:00`;
   });
@@ -116,7 +116,7 @@ const AddServiceForm = ({handleSubmitError, categories}: AddServiceFormProps) =>
         className={"AddServiceForm-text-field"}
       >
         {categories.map((category) => (
-          <MenuItem value={category.id}>{category.name}</MenuItem>
+          <MenuItem value={category.id}>{category.title}</MenuItem>
         ))}
       </Select>
       <Typography variant="body1" component="label" sx={{mt: '1.5rem'}}>
