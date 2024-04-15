@@ -69,10 +69,26 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
     },
     onSubmit: async (values) => {
       try {
+       
+        // Intento de crear un nuevo usuario
         const response = await axios.post(`${config.apiUrl}/users/`, values);
         console.log('User created successfully:', response.data);
-        toast.success('Registro exitoso! Bienvenido/a a la plataforma.');
-        navigate('/mis-servicios');
+        toast.success('Registro exitoso! Bienvenido/a a la plataforma.', { autoClose: 5000 });
+    
+        // Preparar datos de autenticación
+        const loginData = {
+          email: values.email,
+          password: values.password,
+          google_id_token: ""  // Asumiendo que no se utiliza autenticación de Google en este paso
+        };
+    
+        // Intento de autenticar al usuario y obtener el token JWT
+        const loginResponse = await axios.post(`${config.apiUrl}/auth/login/`, loginData);
+        console.log('Login successful. Obtained JWT:', loginResponse.data.token);
+        localStorage.setItem(config.LOCAL_STORAGE_JWT_KEY, loginResponse.data.token);
+      
+          // Retraso antes de redirigir
+        setTimeout(() => navigate('/mis-servicios'), 2000);
       } catch (error) {
         console.error('Error creating user:', error);
         
