@@ -15,16 +15,16 @@ const MyServicesPage = () => {
 
   const navigate = useNavigate();
 
-    useEffect(() => {
-        axios.get(`${config.apiUrl}/services/?mine=true`,
-            {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
-            .then((response) => {
-                setServices(response.data);
-            }).catch((error) => {
-            console.error(error);
-            setServiceError(true);
-        });
-    }, []);
+  useEffect(() => {
+    axios.get(`${config.apiUrl}/services/?mine=true`,
+      {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
+      .then((response) => {
+        setServices(response.data);
+      }).catch((error) => {
+      console.error(error);
+      setServiceError(true);
+    });
+  }, []);
 
   return (
     <Box className={"MyServicesPage"}>
@@ -42,11 +42,13 @@ const MyServicesPage = () => {
       <Box className={"MyServicesPage-services"}>
         {services.map((service) => (<ProviderServiceItem service={service}/>))}
         {!serviceError && services.length === 0 && (
-          <Typography variant={"body1"} className={"MyServicesPage-no-services"}>No hay servicios registrados</Typography>
+          <Typography variant={"body1"} className={"MyServicesPage-no-services"}>No hay servicios
+            registrados</Typography>
         )}
         {serviceError && (
-        <Typography variant={"body1"} className={"MyServicesPage-service-error"}>Servicios no disponibles. Por favor, intenta de nuevo más tarde.</Typography>
-          )}
+          <Typography variant={"body1"} className={"MyServicesPage-service-error"}>Servicios no disponibles. Por favor,
+            intenta de nuevo más tarde.</Typography>
+        )}
       </Box>
     </Box>
   )
