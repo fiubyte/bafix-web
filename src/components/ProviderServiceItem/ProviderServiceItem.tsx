@@ -21,14 +21,20 @@ const ProviderServiceItem = ({service}: ProviderServiceItemProps) => {
           <span className={"ProviderServiceItem-title"}>{service.title}</span>
           <span className={"ProviderServiceItem-category"}> • {service.service_category.title}</span></Typography>
       </Box>
-      {service.approved ? (
+      {service.approved && (
         <Box className={"ProviderServiceItem-approved"}>
           <Typography variant={"body1"}>APROBADO</Typography>
         </Box>
-      ) : (
-        <Box className={"ProviderServiceItem-pendent"}>
-          <Typography variant={"body1"}>PENDIENTE DE APROBACIÓN</Typography>
-        </Box>
+      )}
+      {service?.approved === null && (
+          <Box className={"ProviderServiceItem-pending"}>
+            <Typography variant={"body1"}>PENDIENTE</Typography>
+          </Box>
+      )}
+      {service.approved === false && (
+          <Box className={"ProviderServiceItem-rejected"}>
+            <Typography variant={"body1"}>RECHAZADO</Typography>
+          </Box>
       )}
     </Box>
   )

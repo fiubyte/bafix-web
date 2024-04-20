@@ -9,6 +9,7 @@
     color: dodgerblue;
     font-weight: bold;
 }
+
 .AdminServiceDetailPage-subtitle {
     color: #434147;
 }
@@ -61,7 +62,7 @@
     flex: 1;
     flex-direction: column;
     color: black;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
 
 .AdminServiceDetailPage-profile-image {
@@ -102,4 +103,27 @@
 
 .AdminServiceDetailPage-validated {
     background-color: #7DD891;
+}
+
+.AdminServiceDetailPage-rejected {
+    background-color: #D87D7E;
+}
+
+.AdminServiceDetailPage-back {
+    background-color: #6C93F6;
+}
+
+.AdminServiceDetailPage-reject-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    background-color: white;
+    border: 1px solid #909090;
+    padding: 16px;
+}
+
+.AdminServiceDetailPage-reject-modal-container {
+    height: 100%;
 }

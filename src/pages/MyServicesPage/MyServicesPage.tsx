@@ -7,10 +7,11 @@ import {useNavigate} from "react-router-dom";
 import ProviderServiceItem from "../../components/ProviderServiceItem/ProviderServiceItem";
 import axios from "axios";
 import config from "../../config";
+import {Service} from "../../models/Service";
 
 const MyServicesPage = () => {
 
-  const [services, setServices] = React.useState([]);
+  const [services, setServices] = React.useState<Service[]>([]);
   const [serviceError, setServiceError] = React.useState(false);
 
   const navigate = useNavigate();
@@ -19,7 +20,9 @@ const MyServicesPage = () => {
     axios.get(`${config.apiUrl}/services/?mine=true`,
       {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
       .then((response) => {
-        setServices(response.data);
+          var services: Service[] = response.data;
+          services = services.sort(function(a,b) {return (a.approved === b.approved)? 0 : a.approved? -1 : 1;} ).reverse();
+          setServices(services);
       }).catch((error) => {
       console.error(error);
       setServiceError(true);

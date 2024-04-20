@@ -204,7 +204,7 @@ const AddServiceForm = ({handleSubmitError, categories}: AddServiceFormProps) =>
         </Grid>
       </Grid>
       <Button variant="contained" type="submit" className={"AddServiceForm-button"}>
-        Finalizar registro
+        Agregar servicio
       </Button>
     </form>
   )

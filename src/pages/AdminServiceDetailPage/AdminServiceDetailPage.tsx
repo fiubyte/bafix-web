@@ -1,4 +1,4 @@
-import {Alert, Box, Button, Grid, Link, Snackbar, Typography} from "@mui/material";
+import {Alert, Box, Button, Grid, Link, Modal, Snackbar, TextField, Typography} from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import React, {useEffect} from "react";
 import "./AdminServiceDetailPage.css";
@@ -16,6 +16,8 @@ const AdminServiceDetailPage = () => {
     const [fetchService, setFetchService] = React.useState(false);
     const [showSnackbar, setShowSnackbar] = React.useState(false);
     const [snackBarMessage, setSnackBarMessage] = React.useState("");
+    const [showRejectModal, setShowRejectModal] = React.useState(false);
+    const [rejectServiceMessage, setRejectServiceMessage] = React.useState("");
 
 
     useEffect(() => {
@@ -68,14 +70,53 @@ const AdminServiceDetailPage = () => {
         )
     }
 
+    const rejectService = async (serviceId: number, rejectServiceMessage: string) => {
+        const body = {
+            rejected_message: rejectServiceMessage
+        };
+        axios.post(`${config.apiUrl}/services/${serviceId}/reject/`, body, {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}}).then(
+            (response) => {
+                console.log("Service rejected");
+                console.log(response);
+                setShowRejectModal(false)
+                setShowSnackbar(true)
+                setSnackBarMessage("Servicio rechazado correctamente")
+            }
+        ).catch(
+            (error) => {
+                console.log(error);
+                setShowRejectModal(false)
+                setShowSnackbar(true)
+                setSnackBarMessage("Ocurrió un error al rechazar el Servicio. Intente nuevamente más tarde")
+            }
+        )
+    }
+
     const handleApproveUser = (userId: number) => {
         console.log("User id to approve: " + userId)
-        approveUser(userId).then(_ => {});
+        approveUser(userId).then(_ => {
+        });
     };
 
     const handleApproveService = (serviceId: number) => {
         console.log("Service id to approve: " + serviceId)
-        approveService(serviceId).then(_ => {});
+        approveService(serviceId).then(_ => {
+        });
+    };
+
+    const handleRejectService = (serviceId: number, rejectServiceMessage: string) => {
+        console.log("Service id to reject: " + serviceId + " with message: " + rejectServiceMessage)
+        rejectService(serviceId, rejectServiceMessage).then(_ => {
+        });
+    };
+
+    const handleOpenRejectServiceModal = () => {
+        setRejectServiceMessage("")
+        setShowRejectModal(true)
+    };
+
+    const handleCloseRejectServiceAttempt = () => {
+        setShowRejectModal(false)
     };
 
     const handleClose = () => {
@@ -106,6 +147,47 @@ const AdminServiceDetailPage = () => {
                     {snackBarMessage}
                 </Alert>
             </Snackbar>
+
+            <Modal
+                open={showRejectModal}
+                onClose={handleCloseRejectServiceAttempt}
+                className={"AdminServiceDetailPage-reject-modal"}
+            >
+                <Box>
+                    <Grid container direction="column" className={"AdminServiceDetailPage-reject-modal-container"}>
+                        <Grid>
+                            <Typography variant={"h3"} align={"center"}
+                                        className={"AdminServiceDetailPage-subtitle"}>Ingrese el motivo del
+                                rechazo</Typography>
+                        </Grid>
+                        <Grid>
+                            <TextField
+                                value={rejectServiceMessage}
+                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                    setRejectServiceMessage(event.target.value);
+                                }}
+                                fullWidth
+                                multiline
+                                variant="outlined"
+                            />
+                        </Grid>
+                        <Grid item>
+                            <Grid item>
+                                <Button variant="contained"
+                                        className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
+                                        onClick={() => handleCloseRejectServiceAttempt()}>CANCELAR</Button>
+                            </Grid>
+                            <Grid item>
+                                {service && (
+                                    <Button variant="contained"
+                                            className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected AdminServiceDetailPage-back"}
+                                            onClick={() => handleRejectService(service.id, rejectServiceMessage)}>ENVIAR</Button>
+                                )}
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </Modal>
 
             {service && (
                 <Box className={"AdminServiceDetailPage-banner"}>
@@ -189,19 +271,36 @@ const AdminServiceDetailPage = () => {
                             <Typography
                                 variant={"body1"}>{service?.availability_time_start} - {service?.availability_time_end}</Typography>
                         </Grid>
-                        <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
+                        <Grid item xs={1} className={"AdminServiceDetailPage-data-container"}>
                             <Typography variant={"body1"}>{service?.user.max_radius} km</Typography>
                         </Grid>
-                        <Grid item xs={3} className={"AdminServiceDetailPage-data-container"}>
+                        <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
+                            {service?.approved == null && (
+                                <div>
+                                    <Button
+                                        className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-validated"}
+                                        onClick={() => handleApproveService(service?.id)}>APROBAR</Button>
+                                </div>
+                            )}
+                        </Grid>
+
+                        <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
                             {service?.approved && (
                                 <Button
                                     className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-validated"}
-                                >SERVICIO VALIDADO</Button>
+                                >APROBADO</Button>
                             )}
-                            {!service?.approved && (
+                            {!service?.approved && service?.approved != null && (
                                 <Button
-                                    className={"AdminServiceDetailPage-validate-button"}
-                                    onClick={() => handleApproveService(service?.id)}>VALIDAR SERVICIO</Button>
+                                    className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
+                                >RECHAZADO</Button>
+                            )}
+                            {service?.approved == null && (
+                                <div>
+                                    <Button
+                                        className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
+                                        onClick={() => handleOpenRejectServiceModal()}>RECHAZAR</Button>
+                                </div>
                             )}
                         </Grid>
                     </Grid>
