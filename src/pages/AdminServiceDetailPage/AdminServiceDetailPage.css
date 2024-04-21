@@ -14,10 +14,15 @@
     color: #434147;
 }
 
+.AdminServiceDetailPage-reject-modal-title {
+    color: #909090;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
 
 .AdminServiceDetailPage-banner {
     width: 100%;
-    /*background-color: #FEE94C;*/
     padding: 0.7rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -99,6 +104,7 @@
     border: 1px solid #909090;
     color: #434147;
     align-self: flex-end;
+    margin-bottom: 0.5rem;
 }
 
 .AdminServiceDetailPage-validated {
@@ -114,16 +120,15 @@
 }
 
 .AdminServiceDetailPage-reject-modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    background-color: white;
-    border: 1px solid #909090;
-    padding: 16px;
+    width: 40%;
+    height: 40%;
+    margin: auto;
 }
 
 .AdminServiceDetailPage-reject-modal-container {
+    background-color: white;
     height: 100%;
+    border: 1px solid #909090;
+    border-radius: 2rem;
+    padding: 2rem;
 }
