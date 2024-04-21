@@ -107,6 +107,10 @@ const AdminServiceDetailPage = () => {
   const handleRejectService = (serviceId: number, rejectServiceMessage: string) => {
     console.log("Service id to reject: " + serviceId + " with message: " + rejectServiceMessage)
     rejectService(serviceId, rejectServiceMessage).then(_ => {
+      setFetchService(!fetchService);
+    }).catch((error) => {
+      console.error(error);
+      setServiceError(true);
     });
   };
 
@@ -164,16 +168,19 @@ const AdminServiceDetailPage = () => {
             }}
             fullWidth
             multiline
+            rows={4}
             variant="outlined"
           />
-          <Button variant="contained"
-                  className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
-                  onClick={() => handleCloseRejectServiceAttempt()}>CANCELAR</Button>
-          {service && (
-            <Button variant="contained"
-                    className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected AdminServiceDetailPage-back"}
-                    onClick={() => handleRejectService(service.id, rejectServiceMessage)}>ENVIAR</Button>
-          )}
+          <Box className={"AdminServiceDetailPage-modal-button-container"}>
+            <Button
+              className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
+              onClick={() => handleCloseRejectServiceAttempt()}>CANCELAR</Button>
+            {service && (
+              <Button
+                className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected AdminServiceDetailPage-back"}
+                onClick={() => handleRejectService(service.id, rejectServiceMessage)}>ENVIAR</Button>
+            )}
+          </Box>
         </Box>
       </Modal>
 
