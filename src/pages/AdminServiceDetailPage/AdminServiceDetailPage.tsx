@@ -129,21 +129,21 @@ const AdminServiceDetailPage = () => {
   const handleRejectService = (serviceId: number, rejectServiceMessage: string) => {
     console.log("Service id to reject: " + serviceId + " with message: " + rejectServiceMessage)
     rejectService(serviceId, rejectServiceMessage).then(_ => {
-      setFetchService(!fetchService);
     }).catch((error) => {
       console.error(error);
       setServiceError(true);
     });
+    setFetchService(!fetchService);
   };
 
   const handleRejectProvider = (userId: number, rejectProviderMessage: string) => {
     console.log("Provider id to reject: " + userId + " with message: " + rejectProviderMessage)
     rejectProvider(userId, rejectProviderMessage).then(_ => {
-      setFetchService(!fetchService);
     }).catch((error) => {
       console.error(error);
       setServiceError(true);
     });
+    setFetchService(!fetchService);
   };
 
   const handleOpenRejectServiceModal = () => {
@@ -192,11 +192,13 @@ const AdminServiceDetailPage = () => {
       </Snackbar>
 
       {service && (
-        <RejectModal showRejectModal={showRejectProviderModal} handleClose={handleCloseRejectProviderModal} handleReject={handleRejectProvider} id={service.user.id}/>
+        <RejectModal showRejectModal={showRejectProviderModal} handleClose={handleCloseRejectProviderModal}
+                     handleReject={handleRejectProvider} id={service.user.id}/>
       )}
 
       {service && (
-        <RejectModal showRejectModal={showRejectServiceModal} handleClose={handleCloseRejectModal} handleReject={handleRejectService} id={service.id}/>
+        <RejectModal showRejectModal={showRejectServiceModal} handleClose={handleCloseRejectModal}
+                     handleReject={handleRejectService} id={service.id}/>
       )}
 
       {service && (
@@ -245,7 +247,7 @@ const AdminServiceDetailPage = () => {
                   className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-validated"}
                 >IDENTIDAD VALIDADA</Button>
               )}
-              {!service?.user.approved && (
+              {service?.user.approved == false && (
                 <Button
                   className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
                 >IDENTIDAD RECHAZADA</Button>
