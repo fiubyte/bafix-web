@@ -1,4 +1,4 @@
-import {Alert, Box, Button, Grid, Link, Modal, Snackbar, TextField, Typography} from "@mui/material";
+import {Alert, Box, Button, Grid, Link, Snackbar, Typography} from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import React, {useEffect} from "react";
 import "./AdminServiceDetailPage.css";
@@ -6,6 +6,7 @@ import {useParams} from "react-router-dom";
 import axios from "axios";
 import config from "../../config";
 import {Service} from "../../models/Service";
+import RejectModal from "../../components/RejectModal/RejectModal";
 
 const AdminServiceDetailPage = () => {
 
@@ -16,8 +17,7 @@ const AdminServiceDetailPage = () => {
   const [fetchService, setFetchService] = React.useState(false);
   const [showSnackbar, setShowSnackbar] = React.useState(false);
   const [snackBarMessage, setSnackBarMessage] = React.useState("");
-  const [showRejectModal, setShowRejectModal] = React.useState(false);
-  const [rejectServiceMessage, setRejectServiceMessage] = React.useState("");
+  const [showRejectServiceModal, setShowRejectServiceModal] = React.useState(false);
 
 
   useEffect(() => {
@@ -78,14 +78,14 @@ const AdminServiceDetailPage = () => {
       (response) => {
         console.log("Service rejected");
         console.log(response);
-        setShowRejectModal(false)
+        setShowRejectServiceModal(false)
         setShowSnackbar(true)
         setSnackBarMessage("Servicio rechazado correctamente")
       }
     ).catch(
       (error) => {
         console.log(error);
-        setShowRejectModal(false)
+        setShowRejectServiceModal(false)
         setShowSnackbar(true)
         setSnackBarMessage("Ocurrió un error al rechazar el Servicio. Intente nuevamente más tarde")
       }
@@ -115,12 +115,11 @@ const AdminServiceDetailPage = () => {
   };
 
   const handleOpenRejectServiceModal = () => {
-    setRejectServiceMessage("")
-    setShowRejectModal(true)
+    setShowRejectServiceModal(true)
   };
 
-  const handleCloseRejectServiceAttempt = () => {
-    setShowRejectModal(false)
+  const handleCloseRejectModal = () => {
+    setShowRejectServiceModal(false)
   };
 
   const handleClose = () => {
@@ -152,37 +151,9 @@ const AdminServiceDetailPage = () => {
         </Alert>
       </Snackbar>
 
-      <Modal
-        open={showRejectModal}
-        onClose={handleCloseRejectServiceAttempt}
-        className={"AdminServiceDetailPage-reject-modal"}
-      >
-        <Box className={"AdminServiceDetailPage-reject-modal-container"}>
-          <Typography variant={"h3"} align={"center"}
-                      className={"AdminServiceDetailPage-reject-modal-title"}>Ingrese el motivo del
-            rechazo</Typography>
-          <TextField
-            value={rejectServiceMessage}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setRejectServiceMessage(event.target.value);
-            }}
-            fullWidth
-            multiline
-            rows={4}
-            variant="outlined"
-          />
-          <Box className={"AdminServiceDetailPage-modal-button-container"}>
-            <Button
-              className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
-              onClick={() => handleCloseRejectServiceAttempt()}>CANCELAR</Button>
-            {service && (
-              <Button
-                className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected AdminServiceDetailPage-back"}
-                onClick={() => handleRejectService(service.id, rejectServiceMessage)}>ENVIAR</Button>
-            )}
-          </Box>
-        </Box>
-      </Modal>
+      {service && (
+        <RejectModal showRejectModal={showRejectServiceModal} handleClose={handleCloseRejectModal} handleReject={handleRejectService} id={service.id}/>
+      )}
 
       {service && (
         <Box className={"AdminServiceDetailPage-banner"}>

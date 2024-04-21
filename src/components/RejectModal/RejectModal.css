@@ -1,0 +1,43 @@
+.RejectModal {
+  width: 40%;
+  height: 40%;
+  margin: auto;
+}
+
+.RejectModal-container {
+  background-color: white;
+  border: 1px solid #909090;
+  border-radius: 2rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.RejectModal-title {
+  color: #909090;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.RejectModal-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.RejectModal-button {
+  width: 15rem;
+  border-radius: 2rem;
+  border: 1px solid #909090;
+  color: #434147;
+  margin-bottom: 0.5rem;
+}
+
+.RejectModal-button-cancel {
+  background-color: #D87D7E;
+}
+
+.RejectModal-button-send {
+  background-color: #6C93F6;
+}
