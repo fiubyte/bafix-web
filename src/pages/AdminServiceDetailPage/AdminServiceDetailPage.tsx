@@ -18,7 +18,7 @@ const AdminServiceDetailPage = () => {
   const [showSnackbar, setShowSnackbar] = React.useState(false);
   const [snackBarMessage, setSnackBarMessage] = React.useState("");
   const [showRejectServiceModal, setShowRejectServiceModal] = React.useState(false);
-
+  const [showRejectProviderModal, setShowRejectProviderModal] = React.useState(false);
 
   useEffect(() => {
     console.log("Received Service ID: " + id)
@@ -92,6 +92,28 @@ const AdminServiceDetailPage = () => {
     )
   }
 
+  const rejectProvider = async (userId: number, rejectProviderMessage: string) => {
+    const body = {
+      rejected_message: rejectProviderMessage
+    };
+    axios.post(`${config.apiUrl}/users/${userId}/reject/`, body, {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}}).then(
+      (response) => {
+        console.log("Provider rejected");
+        console.log(response);
+        setShowRejectProviderModal(false)
+        setShowSnackbar(true)
+        setSnackBarMessage("Proveedor rechazado correctamente")
+      }
+    ).catch(
+      (error) => {
+        console.log(error);
+        setShowRejectProviderModal(false)
+        setShowSnackbar(true)
+        setSnackBarMessage("Ocurrió un error al rechazar el Proveedor. Intente nuevamente más tarde")
+      }
+    )
+  }
+
   const handleApproveUser = (userId: number) => {
     console.log("User id to approve: " + userId)
     approveUser(userId).then(_ => {
@@ -114,13 +136,31 @@ const AdminServiceDetailPage = () => {
     });
   };
 
+  const handleRejectProvider = (userId: number, rejectProviderMessage: string) => {
+    console.log("Provider id to reject: " + userId + " with message: " + rejectProviderMessage)
+    rejectProvider(userId, rejectProviderMessage).then(_ => {
+      setFetchService(!fetchService);
+    }).catch((error) => {
+      console.error(error);
+      setServiceError(true);
+    });
+  };
+
   const handleOpenRejectServiceModal = () => {
     setShowRejectServiceModal(true)
   };
 
+  const handleOpenRejectProviderModal = () => {
+    setShowRejectProviderModal(true)
+  }
+
   const handleCloseRejectModal = () => {
     setShowRejectServiceModal(false)
   };
+
+  const handleCloseRejectProviderModal = () => {
+    setShowRejectProviderModal(false)
+  }
 
   const handleClose = () => {
     setShowSnackbar(false);
@@ -150,6 +190,10 @@ const AdminServiceDetailPage = () => {
           {snackBarMessage}
         </Alert>
       </Snackbar>
+
+      {service && (
+        <RejectModal showRejectModal={showRejectProviderModal} handleClose={handleCloseRejectProviderModal} handleReject={handleRejectProvider} id={service.user.id}/>
+      )}
 
       {service && (
         <RejectModal showRejectModal={showRejectServiceModal} handleClose={handleCloseRejectModal} handleReject={handleRejectService} id={service.id}/>
@@ -203,8 +247,18 @@ const AdminServiceDetailPage = () => {
               )}
               {!service?.user.approved && (
                 <Button
+                  className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
+                >IDENTIDAD RECHAZADA</Button>
+              )}
+              {service?.user.approved == null && (
+                <Button
                   className={"AdminServiceDetailPage-validate-button"}
                   onClick={() => handleApproveUser(service.user.id)}>VALIDAR IDENTIDAD</Button>
+              )}
+              {service?.user.approved == null && (
+                <Button
+                  className={"AdminServiceDetailPage-validate-button"}
+                  onClick={() => handleOpenRejectProviderModal()}>RECHAZAR INDENTIDAD</Button>
               )}
             </Grid>
           </Grid>

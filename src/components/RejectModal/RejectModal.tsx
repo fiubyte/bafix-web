@@ -1,5 +1,6 @@
 import {Box, Button, Modal, TextField, Typography} from "@mui/material";
 import React from "react";
+import "./RejectModal.css";
 
 type RejectModalProps = {
   showRejectModal: boolean;
@@ -37,7 +38,7 @@ const RejectModal = ({showRejectModal, handleClose, handleReject, id}: RejectMod
             className={"RejectModal-button RejectModal-button-cancel"}
             onClick={() => handleClose()}>CANCELAR</Button>
           <Button
-            className={"RejectModal-button"}
+            className={"RejectModal-button RejectModal-button-send"}
             onClick={() => handleReject(id, rejectMessage)}>ENVIAR</Button>
         </Box>
       </Box>
