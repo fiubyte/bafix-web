@@ -247,7 +247,7 @@ const AdminServiceDetailPage = () => {
                   className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-validated"}
                 >IDENTIDAD VALIDADA</Button>
               )}
-              {service?.user.approved == false && (
+              {service?.user.approved === false && (
                 <Button
                   className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
                 >IDENTIDAD RECHAZADA</Button>
