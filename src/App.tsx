@@ -9,7 +9,7 @@ import AdminLoginPage from "./pages/AdminLoginPage/AdminLoginPage";
 import AdminHomePage from "./pages/AdminHomePage/AdminHomePage";
 import ProviderLoginPage from "./pages/ProviderLoginPage/ProviderLoginPage";
 import AdminServiceDetailPage from "./pages/AdminServiceDetailPage/AdminServiceDetailPage";
-import ProviderServiceDetail from "./components/ProviderServiceDetail/ProviderServiceDetail";
+import ProviderServiceDetailPage from "./pages/ProviderServiceDetailPage/ProviderServiceDetailPage";
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
             <Route path={'/iniciar-sesion'} Component={ProviderLoginPage}/>
             <Route path={'/registro'} Component={RegisterPage}/>
             <Route path={'/mis-servicios'} Component={MyServicesPage}/>
-            <Route path={'/servicio/:id'} Component={ProviderServiceDetail}/>
+            <Route path={'/servicio/:id'} Component={ProviderServiceDetailPage}/>
             <Route path={'/agregar-servicio'} Component={AddServicePage}/>
             <Route path={'/admin'} Component={AdminLoginPage}/>
             <Route path={'/admin/inicio'} Component={AdminHomePage}/>
