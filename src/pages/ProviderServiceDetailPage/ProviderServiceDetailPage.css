@@ -1,0 +1,46 @@
+.ProviderServiceDetailPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ProviderServiceDetailPage-title {
+  margin-left: 2rem;
+}
+
+.ProviderServiceDetailPage-subtitle {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.ProviderServiceDetailPage-banner {
+  width: 100%;
+  background-color: #FEE94C;
+  padding: 0.7rem;
+  margin-top: 1rem;
+}
+
+.ProviderServiceDetailPage-content {
+  margin-top: 2rem;
+  margin-left: 4rem;
+}
+
+.ProviderServiceDetailPage-approved {
+  font-weight: bold;
+  color: green;
+}
+
+.ProviderServiceDetailPage-rejected {
+  font-weight: bold;
+  color: red;
+}
+
+.ProviderServiceDetailPage-back-button {
+  margin-top: 2rem;
+  background-color: black;
+  border-radius: 2rem;
+}
+
+.ProviderServiceDetailPage-back-button:hover {
+  background-color: #333;
+}
