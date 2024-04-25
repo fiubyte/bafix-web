@@ -15,6 +15,9 @@ const ProviderServiceItem = ({service}: ProviderServiceItemProps) => {
       if (window.location.href.includes('admin')) {
         navigate(`/admin/servicio/${service.id}/detalle`);
       }
+      else {
+        navigate(`/servicio/${service.id}`);
+      }
     }}>
       <Box className={"ProviderServiceItem-title-container"}>
         <Typography variant={"h3"}>
