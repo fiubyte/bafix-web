@@ -12,5 +12,6 @@ export interface Service {
     id: number;
     user: User;
     service_category: ServiceCategory;
-    approved: boolean
+    approved: boolean;
+    rejected_message: string;
 }
