@@ -1,4 +1,4 @@
-import {Alert, Box, Button, Grid, Link, Snackbar, Typography} from "@mui/material";
+import {Alert, Box, Button, Grid, Link, Rating, Snackbar, Typography} from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import React, {useEffect} from "react";
 import "./AdminServiceDetailPage.css";
@@ -385,7 +385,7 @@ const AdminServiceDetailPage = () => {
                   <Typography variant={"body1"}>{rate.message}</Typography>
                 </Grid>
                 <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
-                  <Typography variant={"body1"}>{rate.rate}</Typography>
+                  <Rating value={rate.rate} readOnly />
                 </Grid>
                 <Grid item xs={3} className={"AdminServiceDetailPage-data-container"}>
                   {rate.approved && (
