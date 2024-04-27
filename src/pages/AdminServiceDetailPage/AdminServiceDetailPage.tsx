@@ -318,6 +318,39 @@ const AdminServiceDetailPage = () => {
                   onClick={() => handleOpenRejectServiceModal()}>RECHAZAR</Button>
               )}
             </Grid>
+          </Grid>
+
+          <Grid container className={"AdminServiceDetailPage-detail"} rowSpacing={3} columnSpacing={3}>
+            <Grid item xs={12}>
+              <Typography variant={"h4"}
+                          className={"AdminServiceDetailPage-category"}>Comentarios</Typography>
+            </Grid>
+
+            <Grid item xs={3}>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>ID usuario</Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Comentario</Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Calificación</Typography>
+            </Grid>
+            <Grid item xs={3}/>
+
+            {service.rates.map((rate) => (
+              <>
+                <Grid item xs={3} className={"AdminServiceDetailPage-data-container"}>
+                  <Typography variant={"body1"}>{rate.user_id}</Typography>
+                </Grid>
+                <Grid item xs={4} className={"AdminServiceDetailPage-data-container"}>
+                  <Typography variant={"body1"}>{rate.message}</Typography>
+                </Grid>
+                <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
+                  <Typography variant={"body1"}>{rate.rate}</Typography>
+                </Grid>
+                <Grid item xs={3}/>
+              </>
+            ))}
 
           </Grid>
         </>
