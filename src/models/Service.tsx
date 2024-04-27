@@ -1,5 +1,6 @@
 import {User} from "./User";
 import {ServiceCategory} from "./ServiceCategory";
+import {Rate} from "./Rate";
 
 export interface Service {
     service_category_id: number;
@@ -14,4 +15,5 @@ export interface Service {
     service_category: ServiceCategory;
     approved: boolean;
     rejected_message: string;
+    rates: Rate[];
 }

@@ -1,4 +1,4 @@
-import {Alert, Box, Button, Grid, Link, Snackbar, Typography} from "@mui/material";
+import {Alert, Box, Button, Grid, Link, Rating, Snackbar, Typography} from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import React, {useEffect} from "react";
 import "./AdminServiceDetailPage.css";
@@ -112,6 +112,45 @@ const AdminServiceDetailPage = () => {
         setSnackBarMessage("Ocurrió un error al rechazar el Proveedor. Intente nuevamente más tarde")
       }
     )
+  }
+
+  const approveRate = async (serviceId: number, rateId: number) => {
+    axios.post(`${config.apiUrl}/services/${serviceId}/rate/${rateId}/approve`, null,
+      {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}}).then(
+      (response) => {
+        console.log("Rate approved");
+        console.log(response);
+        setFetchService(!fetchService);
+      }
+    ).catch((error) => {
+      console.error(error);
+      setServiceError(true);
+    })
+  };
+
+  const rejectRate = async (serviceId: number, rateId: number) => {
+    axios.post(`${config.apiUrl}/services/${serviceId}/rate/${rateId}/reject`, null,
+      {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}}).then(
+      (response) => {
+        console.log("Rate rejected");
+        console.log(response);
+        setFetchService(!fetchService);
+      }).catch((error) => {
+      console.error(error);
+      setServiceError(true);
+    })
+  };
+
+  const handleApproveRate = (serviceId: number, rateId: number) => {
+    console.log("Rate id to approve: " + rateId)
+    approveRate(serviceId, rateId).then(_ => {
+    });
+  }
+
+  const handleRejectRate = (serviceId: number, rateId: number) => {
+    console.log("Rate id to reject: " + rateId)
+    rejectRate(serviceId, rateId).then(_ => {
+    });
   }
 
   const handleApproveUser = (userId: number) => {
@@ -318,6 +357,61 @@ const AdminServiceDetailPage = () => {
                   onClick={() => handleOpenRejectServiceModal()}>RECHAZAR</Button>
               )}
             </Grid>
+          </Grid>
+
+          <Grid container className={"AdminServiceDetailPage-detail"} rowSpacing={3} columnSpacing={3}>
+            <Grid item xs={12}>
+              <Typography variant={"h4"}
+                          className={"AdminServiceDetailPage-category"}>Comentarios</Typography>
+            </Grid>
+
+            <Grid item xs={3}>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>ID usuario</Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Comentario</Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Calificación</Typography>
+            </Grid>
+            <Grid item xs={3}/>
+
+            {service.rates.map((rate) => (
+              <>
+                <Grid item xs={3} className={"AdminServiceDetailPage-data-container"}>
+                  <Typography variant={"body1"}>{rate.user_id}</Typography>
+                </Grid>
+                <Grid item xs={4} className={"AdminServiceDetailPage-data-container"}>
+                  <Typography variant={"body1"}>{rate.message}</Typography>
+                </Grid>
+                <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
+                  <Rating value={rate.rate} readOnly />
+                </Grid>
+                <Grid item xs={3} className={"AdminServiceDetailPage-data-container"}>
+                  {rate.approved && (
+                    <Button
+                      className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-validated"}>APROBADO</Button>
+                  )}
+                  {rate.approved === false && (
+                    <Button
+                      className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}>RECHAZADO</Button>
+                  )}
+                  {rate.approved == null && (
+                    <Button className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-validated"}
+                            onClick={() => {
+                              handleApproveRate(service.id, rate.id)
+                            }}>APROBAR</Button>
+                  )}
+                  {rate.approved == null && (
+                    <Button className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
+                            onClick={() => {
+                              handleRejectRate(service.id, rate.id)
+                            }}
+                    >RECHAZAR</Button>
+                  )}
+                </Grid>
+              </>
+            ))}
 
           </Grid>
         </>
