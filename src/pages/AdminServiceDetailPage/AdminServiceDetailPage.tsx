@@ -348,7 +348,24 @@ const AdminServiceDetailPage = () => {
                 <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
                   <Typography variant={"body1"}>{rate.rate}</Typography>
                 </Grid>
-                <Grid item xs={3}/>
+                <Grid item xs={3} className={"AdminServiceDetailPage-data-container"}>
+                  {rate.approved && (
+                    <Button className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-validated"}>APROBADO</Button>
+                  )}
+                  {rate.approved === false && (
+                    <Button className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}>RECHAZADO</Button>
+                  )}
+                  {rate.approved == null && (
+                    <Button className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-validated"}
+                            onClick={() => {}}
+                    >APROBAR</Button>
+                  )}
+                  {rate.approved == null && (
+                    <Button className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
+                            onClick={() => {}}
+                    >RECHAZAR</Button>
+                  )}
+                </Grid>
               </>
             ))}
 
