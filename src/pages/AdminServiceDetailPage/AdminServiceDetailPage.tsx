@@ -114,6 +114,20 @@ const AdminServiceDetailPage = () => {
     )
   }
 
+  const approveRate = async (serviceId: number, rateId: number) => {
+    axios.post(`${config.apiUrl}/services/${serviceId}/rates/${rateId}/approve`, null,
+      {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}}).then(
+      (response) => {
+        console.log("Rate approved");
+        console.log(response);
+        setFetchService(!fetchService);
+      }
+    ).catch((error) => {
+      console.error(error);
+      setServiceError(true);
+    })
+  };
+
   const handleApproveUser = (userId: number) => {
     console.log("User id to approve: " + userId)
     approveUser(userId).then(_ => {
