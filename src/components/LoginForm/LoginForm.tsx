@@ -1,11 +1,12 @@
 import "./LoginForm.css";
 import * as Yup from 'yup';
 import {useFormik} from "formik";
-import {Button, TextField, Typography} from "@mui/material";
+import {Box, Button, TextField, Typography} from "@mui/material";
 import React from "react";
 import axios from "axios";
 import config from "../../config";
 import {useNavigate} from "react-router-dom";
+import {BaFixLettersBlack} from "../../assets/Assets";
 
 type LoginFormProps = {
   handleSubmitError: () => void;
@@ -18,12 +19,12 @@ interface LoginValues {
 
 const LoginForm = ({handleSubmitError}: LoginFormProps) => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const validationSchema = Yup.object({
-        email: Yup.string().email('Email inválido').required('Campo requerido'),
-        password: Yup.string().required('Campo requerido')
-    });
+  const validationSchema = Yup.object({
+    email: Yup.string().email('Email inválido').required('Campo requerido'),
+    password: Yup.string().required('Campo requerido')
+  });
 
   const formik = useFormik<LoginValues>({
     initialValues: {
@@ -34,13 +35,13 @@ const LoginForm = ({handleSubmitError}: LoginFormProps) => {
     onSubmit: (values) => {
       axios.post(`${config.apiUrl}/auth/login/`, values).then(
         (response) => {
-            console.log('Login successful. Obtained JWT: ' + response.data.token)
-            localStorage.setItem(config.LOCAL_STORAGE_JWT_KEY, response.data.token);
-            if (window.location.href.includes('admin')) {
-                navigate('/admin/inicio')
-            } else {
-                navigate('/mis-servicios')
-            }
+          console.log('Login successful. Obtained JWT: ' + response.data.token)
+          localStorage.setItem(config.LOCAL_STORAGE_JWT_KEY, response.data.token);
+          if (window.location.href.includes('admin')) {
+            navigate('/admin/inicio')
+          } else {
+            navigate('/mis-servicios')
+          }
         }
       ).catch(
         (error) => {
@@ -53,6 +54,9 @@ const LoginForm = ({handleSubmitError}: LoginFormProps) => {
 
   return (
     <form className={"LoginForm"} onSubmit={formik.handleSubmit}>
+      <Box className={"LoginForm-logo"}>
+        <BaFixLettersBlack/>
+      </Box>
       <Typography variant="body1" component="label">Correo electrónico</Typography>
       <TextField
         variant={"outlined"}
