@@ -255,30 +255,28 @@ const AdminServiceDetailPage = () => {
             <Grid item xs={3}>
               <Typography variant={"h4"}
                           className={"AdminServiceDetailPage-category"}>Proveedor/a</Typography>
+              <Box className={"AdminServiceDetailPage-image-container"}>
+                <img className={"AdminServiceDetailPage-profile-image"}
+                     src={service?.user.profile_photo_url}
+                     alt={service?.user.name}/>
+                <Typography variant={"h4"}>{service?.user.name} {service?.user.surname}</Typography>
+              </Box>
             </Grid>
             <Grid item xs={2}>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Dirección</Typography>
+              <Typography variant={"h4"}>{service?.user.street + " " + service?.user.street_number}</Typography>
               <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>DNI</Typography>
-            </Grid>
-            <Grid item xs={3}>
-              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Validación de
-                identidad</Typography>
-            </Grid>
-            <Grid item xs={4}/>
-
-            <Grid item xs={3} className={"AdminServiceDetailPage-image-container"}>
-              <img className={"AdminServiceDetailPage-profile-image"}
-                   src={service?.user.profile_photo_url}
-                   alt={service?.user.name}/>
-              <Typography variant={"h4"}>{service?.user.name} {service?.user.surname}</Typography>
-            </Grid>
-            <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
               <Typography variant={"h4"}>{service?.user.document_number}</Typography>
-            </Grid>
-            <Grid item xs={3} className={"AdminServiceDetailPage-data-container"}>
               <Link href={service?.user.profile_photo_url}
                     target="_blank"
                     className={"AdminServiceDetailPage-dni-link"}
                     variant={"h4"}>Foto de DNI</Link>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Teléfono</Typography>
+              <Typography variant={"h4"}>{service?.user.phone_number}</Typography>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Correo</Typography>
+              <Typography variant={"h4"}>{service?.user.email}</Typography>
             </Grid>
             <Grid item xs={4} className={"AdminServiceDetailPage-data-container"}>
               {service?.user.approved && (
@@ -385,7 +383,7 @@ const AdminServiceDetailPage = () => {
                   <Typography variant={"body1"}>{rate.message}</Typography>
                 </Grid>
                 <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
-                  <Rating value={rate.rate} readOnly />
+                  <Rating value={rate.rate} readOnly/>
                 </Grid>
                 <Grid item xs={3} className={"AdminServiceDetailPage-data-container"}>
                   {rate.approved && (
