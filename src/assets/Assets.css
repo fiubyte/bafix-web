@@ -1,6 +1,15 @@
 
 .BaFixLogo {
   fill: #fee94c;
-  width: 100%;
+  height: 100%;
+}
+
+.BaFixLettes-white {
+  fill: white;
+  height: 100%;
+}
+
+.BaFixLettes-black {
+  fill: black;
   height: 100%;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import {AppBar, Toolbar, IconButton, Avatar, Box} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import "./Navbar.css";
-import BaFixLogo from "../../assets/BaFixLogo";
+import {BaFixLettersWhite, BaFixLogo} from "../../assets/Assets";
 
 interface NavbarProps {
   isLoggedIn: boolean;
@@ -17,8 +17,13 @@ const Navbar: React.FC<NavbarProps> = ({isLoggedIn, userPhoto}) => {
           <MenuIcon/>
         </IconButton>
 
-        <Box className={"Navbar-logo"}>
-          <BaFixLogo/>
+        <Box className={"Navbar-logo-container"}>
+          <Box className={"Navbar-logo"}>
+            <BaFixLogo/>
+          </Box>
+          <Box className={"Navbar-logo-letters"}>
+            <BaFixLettersWhite/>
+          </Box>
         </Box>
 
         <Box/>

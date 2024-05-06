@@ -5,7 +5,18 @@
   background-color: #000;
 }
 
+.Navbar-logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+}
+
 .Navbar-logo {
-  width: 2.5rem;
   height: 2.5rem;
+}
+
+.Navbar-logo-letters {
+  height: 1.8rem;
+  margin-left: 0.5rem;
 }
