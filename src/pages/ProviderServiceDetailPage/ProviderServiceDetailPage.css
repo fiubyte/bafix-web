@@ -8,6 +8,15 @@
   margin-left: 2rem;
 }
 
+.ProviderServiceDetailPage-service-title {
+  color: dodgerblue;
+  font-weight: bold;
+}
+
+.ProviderServiceDetailPage-category-title {
+  color: #434147;
+}
+
 .ProviderServiceDetailPage-subtitle {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
@@ -43,4 +52,14 @@
 
 .ProviderServiceDetailPage-back-button:hover {
   background-color: #333;
+}
+
+.ProviderServiceDetailPage-rating-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+
+.ProviderServiceDetailPage-rating {
+  margin-right: 1rem;
 }

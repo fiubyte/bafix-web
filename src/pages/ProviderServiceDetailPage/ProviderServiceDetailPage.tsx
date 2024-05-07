@@ -1,9 +1,9 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Service} from "../../models/Service";
 import axios from "axios";
 import config from "../../config";
-import {Box, Button, Typography} from "@mui/material";
+import {Box, Button, Rating, Typography} from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import "./ProviderServiceDetailPage.css";
 
@@ -30,7 +30,7 @@ const ProviderServiceDetailPage = () => {
       console.error(error);
       setServiceError(true);
     });
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (service && service.rates.length > 0) {
@@ -62,10 +62,12 @@ const ProviderServiceDetailPage = () => {
       <Box className={"ProviderServiceDetailPage-content"}>
         {serviceLoaded && service && (
           <>
-            <Typography variant={"h3"} className={"ProviderServiceDetailPage-subtitle"}>Título</Typography>
-            <Typography variant={"h4"}>{service.title}</Typography>
-            <Typography variant={"h3"} className={"ProviderServiceDetailPage-subtitle"}>Categoría</Typography>
-            <Typography variant={"h4"}>{service.service_category.title}</Typography>
+            <Box>
+              <Typography variant={"h3"} display="inline"
+                          className={"ProviderServiceDetailPage-service-title"}>{service?.title} </Typography>
+              <Typography variant={"h3"} display="inline"
+                          className={"ProviderServiceDetailPage-subtitle"}>• {service?.service_category.title}</Typography>
+            </Box>
             <Typography variant={"h3"} className={"ProviderServiceDetailPage-subtitle"}>Descripción</Typography>
             <Typography variant={"h4"}>{service.description}</Typography>
             <Typography variant={"h3"} className={"ProviderServiceDetailPage-subtitle"}>Días de atención</Typography>
@@ -87,6 +89,11 @@ const ProviderServiceDetailPage = () => {
             {service.approved === null && (
               <Typography variant={"h4"} className={"ProviderServiceDetailPage-pending"}>Pendiente</Typography>
             )}
+            <Typography variant={"h3"} className={"ProviderServiceDetailPage-subtitle"}>Calificación promedio</Typography>
+            <Box className={"ProviderServiceDetailPage-rating-container"}>
+              <Rating name="read-only" value={averageRating} readOnly className={"ProviderServiceDetailPage-rating"}/>
+              <Typography variant={"h4"}>{averageRating.toFixed(1)} - {service.rates.length} calificaciones</Typography>
+            </Box>
           </>
         )}
         {!serviceLoaded && (
