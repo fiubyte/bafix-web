@@ -11,6 +11,7 @@ const ProviderServiceDetailPage = () => {
 
   const {id} = useParams();
   const [service, setService] = useState<Service>();
+  const [averageRating, setAverageRating] = useState<number>(0);
   const [serviceLoaded, setServiceLoaded] = useState<boolean>(false);
   const [serviceError, setServiceError] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -41,6 +42,11 @@ const ProviderServiceDetailPage = () => {
         <Typography variant={"h3"}>Error al cargar el servicio</Typography>
       </Box>
     );
+  }
+
+
+  if (service && service.rates.length > 0) {
+    setAverageRating(service.rates.reduce((acc, rate) => acc + rate.rate, 0) / service.rates.length);
   }
 
   return (
