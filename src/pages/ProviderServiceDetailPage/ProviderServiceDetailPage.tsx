@@ -32,6 +32,12 @@ const ProviderServiceDetailPage = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (service && service.rates.length > 0) {
+      setAverageRating(service.rates.reduce((acc, rate) => acc + rate.rate, 0) / service.rates.length);
+    }
+  }, [service]);
+
   if (serviceError) {
     return (
       <Box className={"ProviderServiceDetailPage"}>
@@ -45,9 +51,7 @@ const ProviderServiceDetailPage = () => {
   }
 
 
-  if (service && service.rates.length > 0) {
-    setAverageRating(service.rates.reduce((acc, rate) => acc + rate.rate, 0) / service.rates.length);
-  }
+
 
   return (
     <Box className={"ProviderServiceDetailPage"}>
