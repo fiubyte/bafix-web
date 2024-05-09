@@ -20,6 +20,7 @@ interface RegisterValues {
   name: string;
   surname: string;
   document_number: string;
+  document_photo_url: string;
   street: string;
   street_number: string;
   postal_code: string;
@@ -41,6 +42,7 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
     name: Yup.string().required('Campo requerido'),
     surname: Yup.string().required('Campo requerido'),
     document_number: Yup.string().required('Campo requerido'),
+    document_photo_url: Yup.string().required('Campo requerido'),
     street: Yup.string().required('Campo requerido'),
     street_number: Yup.string().required('Campo requerido'),
     postal_code: Yup.string().required('Campo requerido'),
@@ -60,6 +62,7 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
       name: '',
       surname: '',
       document_number: '',
+      document_photo_url: '',
       street: '',
       street_number: '',
       postal_code: '',
@@ -145,6 +148,7 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
         {renderTextField('Número', 'street_number')}
         {renderTextField('Código postal', 'postal_code')}
         {renderTextField('Teléfono', 'phone_number')}
+        {renderTextField('Link del DNI', 'document_photo_url')}
       </Grid>
       <Typography variant="h3">Cuenta de inicio de sesión</Typography>
       <Grid container className="RegisterForm-grid" columnSpacing={4}>
