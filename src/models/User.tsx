@@ -4,6 +4,7 @@ export interface User {
     surname: string;
     profile_photo_url: string;
     document_number: string;
+    document_photo_url: string;
     street: string;
     street_number: string;
     postal_code: string;

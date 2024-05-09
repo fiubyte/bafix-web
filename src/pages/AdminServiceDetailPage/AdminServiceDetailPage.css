@@ -142,3 +142,27 @@
     flex-direction: column;
 }
 
+.AdminServiceDetailPage-document-photo-modal {
+    width: 40%;
+    height: 40%;
+    margin: auto;
+}
+
+.AdminServiceDetailPage-document-photo-modal-container {
+    background-color: white;
+    border: 1px solid #909090;
+    border-radius: 2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.AdminServiceDetailPage-document-photo-modal-button {
+    width: 15rem;
+    border-radius: 2rem;
+    border: 1px solid #909090;
+    color: #434147;
+    margin: auto;
+    background-color: #D87D7E;
+}
+

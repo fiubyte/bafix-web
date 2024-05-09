@@ -1,4 +1,4 @@
-import {Alert, Box, Button, Grid, Link, Rating, Snackbar, Typography} from "@mui/material";
+import {Alert, Box, Button, Grid, Link, Modal, Rating, Snackbar, Typography} from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import React, {useEffect} from "react";
 import "./AdminServiceDetailPage.css";
@@ -19,6 +19,7 @@ const AdminServiceDetailPage = () => {
   const [snackBarMessage, setSnackBarMessage] = React.useState("");
   const [showRejectServiceModal, setShowRejectServiceModal] = React.useState(false);
   const [showRejectProviderModal, setShowRejectProviderModal] = React.useState(false);
+  const [showDocumentPhotoModal, setShowDocumentPhotoModal] = React.useState(false);
 
   useEffect(() => {
     console.log("Received Service ID: " + id)
@@ -240,6 +241,18 @@ const AdminServiceDetailPage = () => {
                      handleReject={handleRejectService} id={service.id}/>
       )}
 
+      {service && showDocumentPhotoModal && (
+        <Modal open={showDocumentPhotoModal} onClose={() => setShowDocumentPhotoModal(false)}
+               className={"AdminServiceDetailPage-document-photo-modal"}>
+          <Box className={"AdminServiceDetailPage-document-photo-modal-container"}>
+            <img src={service.user.document_photo_url} alt={"Document"}/>
+            <Button className={"AdminServiceDetailPage-document-photo-modal-button"} onClick={() => setShowDocumentPhotoModal(false)}>
+              Cerrar
+            </Button>
+          </Box>
+        </Modal>
+      )}
+
       {service && (
         <Box className={"AdminServiceDetailPage-banner"}>
           <Typography variant={"h3"} display="inline"
@@ -267,7 +280,7 @@ const AdminServiceDetailPage = () => {
               <Typography variant={"h4"}>{service?.user.street + " " + service?.user.street_number}</Typography>
               <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>DNI</Typography>
               <Typography variant={"h4"}>{service?.user.document_number}</Typography>
-              <Link href={service?.user.profile_photo_url}
+              <Link onClick={() => setShowDocumentPhotoModal(true)}
                     target="_blank"
                     className={"AdminServiceDetailPage-dni-link"}
                     variant={"h4"}>Foto de DNI</Link>
