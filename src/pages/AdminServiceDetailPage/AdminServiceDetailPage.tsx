@@ -246,7 +246,8 @@ const AdminServiceDetailPage = () => {
                className={"AdminServiceDetailPage-document-photo-modal"}>
           <Box className={"AdminServiceDetailPage-document-photo-modal-container"}>
             <img src={service.user.document_photo_url} alt={"Document"}/>
-            <Button className={"AdminServiceDetailPage-document-photo-modal-button"} onClick={() => setShowDocumentPhotoModal(false)}>
+            <Button className={"AdminServiceDetailPage-document-photo-modal-button"}
+                    onClick={() => setShowDocumentPhotoModal(false)}>
               Cerrar
             </Button>
           </Box>
@@ -318,35 +319,27 @@ const AdminServiceDetailPage = () => {
             <Grid item xs={3}>
               <Typography variant={"h4"}
                           className={"AdminServiceDetailPage-category"}>Descripción</Typography>
-            </Grid>
-            <Grid item xs={2}>
-              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Días de
-                atención</Typography>
+              <Typography variant={"body1"}>{service?.description}</Typography>
             </Grid>
             <Grid item xs={2}>
               <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Rango
                 horario</Typography>
-            </Grid>
-            <Grid item xs={2}>
-              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Distancia
-                máxima</Typography>
-            </Grid>
-            <Grid item xs={3}/>
-
-            <Grid item xs={3} className={"AdminServiceDetailPage-data-container"}>
-              <Typography variant={"body1"}>{service?.description}</Typography>
-            </Grid>
-            <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
-              <Typography variant={"body1"}>{service?.availability_days.replace(/,/g, ', ')}</Typography>
-            </Grid>
-            <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
               <Typography
                 variant={"body1"}>{service?.availability_time_start} - {service?.availability_time_end}</Typography>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Días de
+                atención</Typography>
+              <Typography variant={"body1"}>{service?.availability_days.replace(/,/g, ', ')}</Typography>
             </Grid>
-            <Grid item xs={2} className={"AdminServiceDetailPage-data-container"}>
+            <Grid item xs={3}>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Fecha de solicitud</Typography>
+              <Typography variant={"body1"}>
+                {new Date(service?.requested_date).toLocaleDateString()}
+              </Typography>
+              <Typography variant={"h4"} className={"AdminServiceDetailPage-category"}>Distancia
+                máxima</Typography>
               <Typography variant={"body1"}>{service?.user.max_radius} km</Typography>
             </Grid>
-            <Grid item xs={3} className={"AdminServiceDetailPage-data-container"}>
+            <Grid item xs={4} className={"AdminServiceDetailPage-data-container"}>
               {service?.approved == null && (
                 <Button
                   className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-validated"}
