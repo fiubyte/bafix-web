@@ -6,6 +6,8 @@ import config from "../../config";
 import {Box, Button, Rating, Typography} from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import "./ProviderServiceDetailPage.css";
+import {User} from "../../models/User";
+import {Rate} from "../../models/Rate";
 
 const ProviderServiceDetailPage = () => {
 
@@ -14,6 +16,7 @@ const ProviderServiceDetailPage = () => {
   const [averageRating, setAverageRating] = useState<number>(0);
   const [serviceLoaded, setServiceLoaded] = useState<boolean>(false);
   const [serviceError, setServiceError] = useState<boolean>(false);
+  const [users, setUsers] = useState<User[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,9 +36,23 @@ const ProviderServiceDetailPage = () => {
   }, [id]);
 
   useEffect(() => {
-    if (service && service.rates.length > 0) {
-      setAverageRating(service.rates.reduce((acc, rate) => acc + rate.rate, 0) / service.rates.length);
+    if (!service) {
+      return;
     }
+    if (!service.rates || service.rates.length === 0) {
+      return;
+    }
+
+    setAverageRating(service.rates.reduce((acc, rate) => acc + rate.rate, 0) / service.rates.length);
+    const user_ids = service.rates.map(rate => rate.user_id.toString()).join(",");
+    axios.get(`${config.apiUrl}/users?user_ids=${user_ids}`,
+      {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
+      .then((response) => {
+          setUsers(response.data);
+        }
+      ).catch((error) => {
+      console.error(error);
+    });
   }, [service]);
 
   if (serviceError) {
@@ -50,6 +67,25 @@ const ProviderServiceDetailPage = () => {
     );
   }
 
+  const renderComment = (rate: Rate) => {
+    const user = users.find(user => user.id === rate.user_id);
+    if (!user) {
+      return null;
+    }
+    return (
+      <Box key={rate.id} className={"ProviderServiceDetailPage-rate-container"}>
+        <Box className={"ProviderServiceDetailPage-rate-user-container"}>
+          <img src={user.profile_photo_url} alt={"Profile"} className={"ProviderServiceDetailPage-profile-photo"}/>
+          <Box>
+            <Typography variant={"h4"}>{user.name} {user.surname}</Typography>
+            <Rating name="read-only" value={rate.rate} readOnly/>
+          </Box>
+        </Box>
+        <Typography variant={"body1"}>{rate.message}</Typography>
+        <hr/>
+      </Box>
+    );
+  }
 
 
 
@@ -94,6 +130,10 @@ const ProviderServiceDetailPage = () => {
               <Rating name="read-only" value={averageRating} readOnly className={"ProviderServiceDetailPage-rating"}/>
               <Typography variant={"h4"}>{averageRating.toFixed(1)} - {service.rates.length} calificaciones</Typography>
             </Box>
+            <Typography variant={"h3"} className={"ProviderServiceDetailPage-subtitle"}>Opiniones</Typography>
+            {service.rates.map((rate) => (
+              renderComment(rate)
+            ))}
           </>
         )}
         {!serviceLoaded && (

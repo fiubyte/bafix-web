@@ -63,3 +63,21 @@
 .ProviderServiceDetailPage-rating {
   margin-right: 1rem;
 }
+
+.ProviderServiceDetailPage-rate-container {
+  margin-bottom: 1rem;
+  max-width: 30rem;
+}
+
+.ProviderServiceDetailPage-rate-user-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.ProviderServiceDetailPage-profile-photo {
+  object-fit: cover;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
