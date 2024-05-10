@@ -17,6 +17,7 @@ const ProviderServiceDetailPage = () => {
   const [serviceLoaded, setServiceLoaded] = useState<boolean>(false);
   const [serviceError, setServiceError] = useState<boolean>(false);
   const [users, setUsers] = useState<User[]>([]);
+  const [commentsLoaded, setCommentsLoaded] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,6 +50,7 @@ const ProviderServiceDetailPage = () => {
       {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
       .then((response) => {
           setUsers(response.data);
+          setCommentsLoaded(true);
         }
       ).catch((error) => {
       console.error(error);
@@ -88,7 +90,6 @@ const ProviderServiceDetailPage = () => {
   }
 
 
-
   return (
     <Box className={"ProviderServiceDetailPage"}>
       <Navbar isLoggedIn={false}/>
@@ -125,7 +126,8 @@ const ProviderServiceDetailPage = () => {
             {service.approved === null && (
               <Typography variant={"h4"} className={"ProviderServiceDetailPage-pending"}>Pendiente</Typography>
             )}
-            <Typography variant={"h3"} className={"ProviderServiceDetailPage-subtitle"}>Calificación promedio</Typography>
+            <Typography variant={"h3"} className={"ProviderServiceDetailPage-subtitle"}>Calificación
+              promedio</Typography>
             <Box className={"ProviderServiceDetailPage-rating-container"}>
               <Rating name="read-only" value={averageRating} readOnly className={"ProviderServiceDetailPage-rating"}/>
               <Typography variant={"h4"}>{averageRating.toFixed(1)} - {service.rates.length} calificaciones</Typography>
@@ -134,6 +136,12 @@ const ProviderServiceDetailPage = () => {
             {service.rates.map((rate) => (
               renderComment(rate)
             ))}
+            {service.rates.length === 0 && (
+              <Typography variant={"h4"}>No hay opiniones</Typography>
+            )}
+            {!commentsLoaded && (
+              <Typography variant={"h4"}>Cargando opiniones...</Typography>
+            )}
           </>
         )}
         {!serviceLoaded && (
