@@ -13,7 +13,6 @@ const ProviderServiceDetailPage = () => {
 
   const {id} = useParams();
   const [service, setService] = useState<Service>();
-  const [averageRating, setAverageRating] = useState<number>(0);
   const [serviceLoaded, setServiceLoaded] = useState<boolean>(false);
   const [serviceError, setServiceError] = useState<boolean>(false);
   const [users, setUsers] = useState<User[]>([]);
@@ -44,7 +43,6 @@ const ProviderServiceDetailPage = () => {
       return;
     }
 
-    setAverageRating(service.rates.reduce((acc, rate) => acc + rate.rate, 0) / service.rates.length);
     const user_ids = service.rates.map(rate => rate.user_id.toString()).join(",");
     axios.get(`${config.apiUrl}/users?user_ids=${user_ids}`,
       {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
@@ -72,6 +70,9 @@ const ProviderServiceDetailPage = () => {
   const renderComment = (rate: Rate) => {
     const user = users.find(user => user.id === rate.user_id);
     if (!user) {
+      return null;
+    }
+    if (!rate.approved) {
       return null;
     }
     return (
@@ -129,8 +130,8 @@ const ProviderServiceDetailPage = () => {
             <Typography variant={"h3"} className={"ProviderServiceDetailPage-subtitle"}>Calificación
               promedio</Typography>
             <Box className={"ProviderServiceDetailPage-rating-container"}>
-              <Rating name="read-only" value={averageRating} readOnly className={"ProviderServiceDetailPage-rating"}/>
-              <Typography variant={"h4"}>{averageRating.toFixed(1)} - {service.rates.length} calificaciones</Typography>
+              <Rating name="read-only" value={service.avg_rate} readOnly className={"ProviderServiceDetailPage-rating"}/>
+              <Typography variant={"h4"}>{service.avg_rate.toFixed(1)} - {service.rates.length} calificaciones</Typography>
             </Box>
             <Typography variant={"h3"} className={"ProviderServiceDetailPage-subtitle"}>Opiniones</Typography>
             {service.rates.map((rate) => (

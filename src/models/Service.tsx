@@ -10,6 +10,7 @@ export interface Service {
     availability_time_start: string;
     availability_time_end: string;
     availability_days: string;
+    avg_rate: number;
     requested_date: string;
     id: number;
     user: User;
