@@ -23,6 +23,7 @@ const ProviderServiceItem = ({service}: ProviderServiceItemProps) => {
         <Typography variant={"h3"}>
           <span className={"ProviderServiceItem-title"}>{service.title}</span>
           <span className={"ProviderServiceItem-category"}> • {service.service_category.title}</span></Typography>
+        <Typography variant={"h4"}>{service.user.name} {service.user.surname}</Typography>
       </Box>
       {service.approved && (
         <Box className={"ProviderServiceItem-approved"}>

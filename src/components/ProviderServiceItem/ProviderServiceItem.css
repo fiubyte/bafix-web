@@ -11,8 +11,7 @@
 
 .ProviderServiceItem-title-container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
   margin-bottom: 1rem;
 }
 
