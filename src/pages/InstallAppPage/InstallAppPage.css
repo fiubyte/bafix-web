@@ -1,0 +1,42 @@
+.InstallAppPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.InstallAppPage-logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  width: 10rem;
+  margin-bottom: 2rem;
+  background: black;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.InstallAppPage-logo {
+  display: flex;
+  width: 8rem;
+  height: 8rem;
+  align-self: center;
+  justify-content: center;
+}
+
+.InstallAppPage-letters {
+  display: flex;
+  width: 6rem;
+  height: 100%;
+  align-self: center;
+  justify-content: center;
+}
+
+
+.InstallAppPage-playstore {
+  width: 10rem;
+  cursor: pointer;
+}
