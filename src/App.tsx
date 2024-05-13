@@ -10,6 +10,7 @@ import AdminHomePage from "./pages/AdminHomePage/AdminHomePage";
 import ProviderLoginPage from "./pages/ProviderLoginPage/ProviderLoginPage";
 import AdminServiceDetailPage from "./pages/AdminServiceDetailPage/AdminServiceDetailPage";
 import ProviderServiceDetailPage from "./pages/ProviderServiceDetailPage/ProviderServiceDetailPage";
+import InstallAppPage from "./pages/InstallAppPage/InstallAppPage";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path={'/registro'} Component={RegisterPage}/>
             <Route path={'/mis-servicios'} Component={MyServicesPage}/>
             <Route path={'/servicio/:id'} Component={ProviderServiceDetailPage}/>
+            <Route path={'/service/:id'} Component={InstallAppPage}/>
             <Route path={'/agregar-servicio'} Component={AddServicePage}/>
             <Route path={'/admin'} Component={AdminLoginPage}/>
             <Route path={'/admin/inicio'} Component={AdminHomePage}/>
