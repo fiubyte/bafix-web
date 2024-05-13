@@ -131,7 +131,7 @@ const ProviderServiceDetailPage = () => {
               promedio</Typography>
             <Box className={"ProviderServiceDetailPage-rating-container"}>
               <Rating name="read-only" value={service.avg_rate} readOnly className={"ProviderServiceDetailPage-rating"}/>
-              <Typography variant={"h4"}>{service.avg_rate.toFixed(1)} - {service.rates.length} calificaciones</Typography>
+              <Typography variant={"h4"}>{service.avg_rate?.toFixed(1)} - {service.rates.length} calificaciones</Typography>
             </Box>
             <Typography variant={"h3"} className={"ProviderServiceDetailPage-subtitle"}>Opiniones</Typography>
             {service.rates.map((rate) => (
