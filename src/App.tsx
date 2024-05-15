@@ -11,6 +11,7 @@ import ProviderLoginPage from "./pages/ProviderLoginPage/ProviderLoginPage";
 import AdminServiceDetailPage from "./pages/AdminServiceDetailPage/AdminServiceDetailPage";
 import ProviderServiceDetailPage from "./pages/ProviderServiceDetailPage/ProviderServiceDetailPage";
 import InstallAppPage from "./pages/InstallAppPage/InstallAppPage";
+import ChartExample from "./pages/ChartExample/ChartExample";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path={'/admin'} Component={AdminLoginPage}/>
             <Route path={'/admin/inicio'} Component={AdminHomePage}/>
             <Route path={'/admin/servicio/:id/detalle'} Component={AdminServiceDetailPage}/>
+            <Route path={"/example"} Component={ChartExample}/>
           </Routes>
         </BrowserRouter>
       </StyledEngineProvider>
