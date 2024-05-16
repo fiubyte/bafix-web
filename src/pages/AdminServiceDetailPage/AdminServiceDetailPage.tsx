@@ -79,6 +79,7 @@ const AdminServiceDetailPage = () => {
       (response) => {
         console.log("Service rejected");
         console.log(response);
+        setFetchService(!fetchService);
         setShowRejectServiceModal(false)
         setShowSnackbar(true)
         setSnackBarMessage("Servicio rechazado correctamente")
@@ -101,6 +102,7 @@ const AdminServiceDetailPage = () => {
       (response) => {
         console.log("Provider rejected");
         console.log(response);
+        setFetchService(!fetchService);
         setShowRejectProviderModal(false)
         setShowSnackbar(true)
         setSnackBarMessage("Proveedor rechazado correctamente")
@@ -114,6 +116,29 @@ const AdminServiceDetailPage = () => {
       }
     )
   }
+
+  const putProviderToReview = async (userId: number) => {
+    axios.post(`${config.apiUrl}/users/${userId}/review/`, null,
+      {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
+      .then((r) => {
+        console.log("Provider put to review");
+        console.log(r);
+        setFetchService(!fetchService);
+        setShowSnackbar(true)
+        setSnackBarMessage("Proveedor puesto en revisión")
+      }).catch((error) => {
+      console.error(error);
+      setShowSnackbar(true)
+      setSnackBarMessage("Ocurrió un error al poner en revision el Proveedor. Intente nuevamente más tarde")
+    });
+  }
+
+  const handlePutProviderToReview = (userId: number) => {
+    console.log("Provider id to review: " + userId)
+    putProviderToReview(userId).then(_ => {
+    });
+  }
+
 
   const approveRate = async (serviceId: number, rateId: number) => {
     axios.post(`${config.apiUrl}/services/${serviceId}/rate/${rateId}/approve`, null,
@@ -173,7 +198,6 @@ const AdminServiceDetailPage = () => {
       console.error(error);
       setServiceError(true);
     });
-    setFetchService(!fetchService);
   };
 
   const handleRejectProvider = (userId: number, rejectProviderMessage: string) => {
@@ -183,7 +207,6 @@ const AdminServiceDetailPage = () => {
       console.error(error);
       setServiceError(true);
     });
-    setFetchService(!fetchService);
   };
 
   const handleOpenRejectServiceModal = () => {
@@ -302,6 +325,11 @@ const AdminServiceDetailPage = () => {
                 <Button
                   className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
                 >IDENTIDAD RECHAZADA</Button>
+              )}
+              {service?.user.approved === false && (
+                <Button
+                  className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-review"}
+                  onClick={() => handlePutProviderToReview(service.user.id)}>PONER EN REVISIÓN</Button>
               )}
               {service?.user.approved == null && (
                 <Button
