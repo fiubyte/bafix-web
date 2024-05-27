@@ -88,7 +88,6 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
     const isDocumentAvailable = await validateDNI(values.document_number);
     if (!isDocumentAvailable) {
       errors.document_number = 'El número de documento ya está registrado';
-      toast.error('El número de documento ya está registrado, por favor, ingrese otro.');
     }
     return errors;
   },
