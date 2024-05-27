@@ -31,7 +31,7 @@ const MyServicesPage = () => {
 
   return (
     <Box className={"MyServicesPage"}>
-      <Navbar isLoggedIn={false}/>
+      <Navbar isUserLoggedIn={true}/>
       <Box className={"MyServicesPage-banner"}>
         <Typography variant={"h2"} className={"MyServicesPage-title"}>Mis servicios</Typography>
       </Box>

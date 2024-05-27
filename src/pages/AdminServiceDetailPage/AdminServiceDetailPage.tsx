@@ -231,7 +231,7 @@ const AdminServiceDetailPage = () => {
 
   return (
     <Box className={"AdminServiceDetailPage"}>
-      <Navbar isLoggedIn={false}/>
+      <Navbar isUserLoggedIn={true}/>
       {serviceError && !service && (
         <Typography variant={"body1"} className={"AdminServiceDetailPage-service-error"}>Servicio no
           disponible.

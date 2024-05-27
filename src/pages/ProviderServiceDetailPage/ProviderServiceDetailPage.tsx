@@ -58,7 +58,7 @@ const ProviderServiceDetailPage = () => {
   if (serviceError) {
     return (
       <Box className={"ProviderServiceDetailPage"}>
-        <Navbar isLoggedIn={false}/>
+        <Navbar isUserLoggedIn={true}/>
         <Box className={"ProviderServiceDetailPage-banner"}>
           <Typography variant={"h2"} className={"ProviderServiceDetailPage-title"}>Detalle de servicio</Typography>
         </Box>
@@ -93,7 +93,7 @@ const ProviderServiceDetailPage = () => {
 
   return (
     <Box className={"ProviderServiceDetailPage"}>
-      <Navbar isLoggedIn={false}/>
+      <Navbar isUserLoggedIn={true}/>
       <Box className={"ProviderServiceDetailPage-banner"}>
         <Typography variant={"h2"} className={"ProviderServiceDetailPage-title"}>Detalle de servicio</Typography>
       </Box>

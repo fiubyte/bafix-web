@@ -18,7 +18,7 @@ const RegisterPage = () => {
 
   return (
     <Box className={"RegisterPage"}>
-      <Navbar isLoggedIn={false}/>
+      <Navbar isUserLoggedIn={false}/>
       <Box className={"RegisterPage-banner"}>
         <Typography variant={"h2"} className={"RegisterPage-title"}>Formulario de registro</Typography>
       </Box>

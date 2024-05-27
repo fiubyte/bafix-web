@@ -33,7 +33,7 @@ const AdminHomePage = () => {
 
   return (
     <Box className={"AdminHomePage"}>
-      <Navbar isLoggedIn={false}/>
+      <Navbar isUserLoggedIn={true}/>
       <Box className={"AdminHomePage-banner"}>
         <Typography variant={"h2"} className={"AdminHomePage-title"}>Servicios Registrados</Typography>
       </Box>

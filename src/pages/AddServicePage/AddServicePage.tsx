@@ -39,7 +39,7 @@ const AddServicePage = () => {
 
   return (
     <Box className={"AddServicePage"}>
-      <Navbar isLoggedIn={false}/>
+      <Navbar isUserLoggedIn={true}/>
       <Box className={"AddServicePage-banner"}>
         <Typography variant={"h2"} className={"AddServicePage-title"}>Formulario de nuevo servicio</Typography>
       </Box>
