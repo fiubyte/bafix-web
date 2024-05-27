@@ -15,3 +15,22 @@
 .StatsPage-title {
   margin-left: 2rem;
 }
+
+.StatsPage-filter-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.StatsPage-filter {
+  margin: 0 1rem;
+}
+
+.StatsPage-groupby {
+  width: 15rem;
+}
+
+.StatsPage-date-picker {
+  width: 15rem;
+}
