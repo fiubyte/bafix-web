@@ -19,7 +19,9 @@ const StatsPage = () => {
   const [initialDate, setInitialDate] = useState<Dayjs>(dayjs());
   const [finalDate, setFinalDate] = useState<Dayjs>(dayjs().add(1, "day"));
   const [views, setViews] = useState<ServiceView[]>([]);
+  const [filteredViews, setFilteredViews] = useState<ServiceView[]>([]);
   const [contacts, setContacts] = useState<ServiceContact[]>([]);
+  const [filteredContacts, setFilteredContacts] = useState<ServiceContact[]>([]);
 
   useEffect(() => {
     axios.get(`${config.apiUrl}/users/views`,
@@ -41,6 +43,16 @@ const StatsPage = () => {
       console.error(error);
     });
   }, []);
+
+  useEffect(() => {
+    const filteredViews = views.filter(view => dayjs(view.timestamp).isAfter(initialDate.add(-1, "day")) && dayjs(view.timestamp).isBefore(finalDate));
+    setFilteredViews(filteredViews);
+  }, [views, initialDate, finalDate]);
+
+  useEffect(() => {
+    const filteredContacts = contacts.filter(contact => dayjs(contact.timestamp).isAfter(initialDate.add(-1, "day")) && dayjs(contact.timestamp).isBefore(finalDate));
+    setFilteredContacts(filteredContacts);
+  }, [contacts, initialDate, finalDate]);
 
   return (
     <Box className={"StatsPage"}>
@@ -86,10 +98,10 @@ const StatsPage = () => {
         </Box>
       </LocalizationProvider>
       <Box className={"StatsPage-chart"}>
-        <ConversionRateChart views={views} contacts={contacts} groupBy={groupBy}/>
+        <ConversionRateChart views={filteredViews} contacts={filteredContacts} groupBy={groupBy}/>
       </Box>
       <Box className={"StatsPage-chart"}>
-        <TopUsersChart contacts={contacts}/>
+        <TopUsersChart contacts={filteredContacts}/>
       </Box>
     </Box>
   )

@@ -51,7 +51,8 @@ const TopUsersChart = ({contacts}: TopUsersChartProps) => {
   useEffect(() => {
     const updatedData = data.map(item => {
       const user = users.find(user => user.id.toString() === item.name);
-      return {...item, name: user?.name || item.name, photo_url: user?.profile_photo_url || ""};
+      const name = user?.name || item.name;
+      return {...item, name: name, photo_url: user?.profile_photo_url || ""};
     });
     setData(updatedData);
   }, [users]);
