@@ -70,12 +70,6 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
       max_radius: 5,
       profile_photo_url: '',
     },
-    validationSchema,
-    validate: async (values) => {
-    const errors: Partial<RegisterValues> = {};
-
-    return errors;
-  },
     onSubmit: async (values) => {
       try {
 
