@@ -24,7 +24,7 @@ const ConversionRateChart = ({views, contacts, groupBy}: ConversionRateChartProp
   useEffect(() => {
     const groupedData: ConversionRateData[] = [];
     views.forEach(view => {
-      const date = groupBy === "day" ? view.timestamp.toISOString().slice(0, 10) : view.timestamp.toISOString().slice(0, 7);
+      const date = groupBy === "day" ? view.timestamp.slice(0, 10) : view.timestamp.slice(0, 7);
       const existingData = groupedData.find(item => item.date === date);
       if (existingData) {
         existingData.Visitas++;
@@ -33,7 +33,7 @@ const ConversionRateChart = ({views, contacts, groupBy}: ConversionRateChartProp
       }
     });
     contacts.forEach(contact => {
-      const date = groupBy === "day" ? contact.timestamp.toISOString().slice(0, 10) : contact.timestamp.toISOString().slice(0, 7);
+      const date = groupBy === "day" ? contact.timestamp.slice(0, 10) : contact.timestamp.slice(0, 7);
       const existingData = groupedData.find(item => item.date === date);
       if (existingData) {
         existingData.Contactos++;

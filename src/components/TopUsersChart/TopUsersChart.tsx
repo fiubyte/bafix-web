@@ -34,21 +34,27 @@ const TopUsersChart = ({contacts}: TopUsersChartProps) => {
       }
     });
     const sortedData = groupedData.sort((a, b) => b.value - a.value).slice(0, 5);
+    setData(sortedData);
+
     const userIds = sortedData.map(item => item.name).join(",");
     axios.get(`${config.apiUrl}/users?user_ids=${userIds}`,
       {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
       .then((response) => {
           setUsers(response.data);
-          const finalData = sortedData.map(item => {
-            const user = users.find(user => user.id.toString() === item.name);
-            return {name: user?.name || item.name, value: item.value, photo_url: user?.profile_photo_url || ""};
-          });
-          setData(finalData);
+          console.log(response.data);
         }
       ).catch((error) => {
       console.error(error);
     });
   }, [contacts]);
+
+  useEffect(() => {
+    const updatedData = data.map(item => {
+      const user = users.find(user => user.id.toString() === item.name);
+      return {...item, name: user?.name || item.name, photo_url: user?.profile_photo_url || ""};
+    });
+    setData(updatedData);
+  }, [users]);
 
   return (
     <Card className="max-w-4xl">
@@ -66,7 +72,7 @@ const TopUsersChart = ({contacts}: TopUsersChartProps) => {
         <Grid item xs={6}>
           <Grid container spacing={2}>
             {data.map((item, index) => (
-              <Grid item xs={12} key={index}>
+              <Grid item xs={12} key={index} className={"TopUsersChart-user"}>
                 <img src={item.photo_url} alt={item.name} className={"TopUsersChart-photo"}/>
                 <Typography variant={"h4"}>{item.name} - {item.value} contactos</Typography>
               </Grid>

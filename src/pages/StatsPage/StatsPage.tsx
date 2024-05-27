@@ -1,19 +1,46 @@
 import {Box, InputLabel, MenuItem, Select, Typography} from "@mui/material";
 import "./StatsPage.css"
 import Navbar from "../../components/Navbar/Navbar";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {DatePicker} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from "dayjs";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import ConversionRateChart from "../../components/ConversionRateChart/ConversionRateChart";
 import TopUsersChart from "../../components/TopUsersChart/TopUsersChart";
+import {ServiceView} from "../../models/ServiceView";
+import {ServiceContact} from "../../models/ServiceContact";
+import config from "../../config";
+import axios from "axios";
 
 const StatsPage = () => {
 
   const [groupBy, setGroupBy] = useState<"day" | "month">("day");
   const [initialDate, setInitialDate] = useState<Dayjs>(dayjs());
   const [finalDate, setFinalDate] = useState<Dayjs>(dayjs().add(1, "day"));
+  const [views, setViews] = useState<ServiceView[]>([]);
+  const [contacts, setContacts] = useState<ServiceContact[]>([]);
+
+  useEffect(() => {
+    axios.get(`${config.apiUrl}/users/views`,
+      {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
+      .then((response) => {
+          setViews(response.data);
+          console.log(response.data)
+        }
+      ).catch((error) => {
+      console.error(error);
+    });
+    axios.get(`${config.apiUrl}/users/contacts`,
+      {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
+      .then((response) => {
+          setContacts(response.data);
+          console.log(response.data)
+        }
+      ).catch((error) => {
+      console.error(error);
+    });
+  }, []);
 
   return (
     <Box className={"StatsPage"}>
@@ -59,10 +86,10 @@ const StatsPage = () => {
         </Box>
       </LocalizationProvider>
       <Box className={"StatsPage-chart"}>
-        <ConversionRateChart views={[]} contacts={[]} groupBy={groupBy}/>
+        <ConversionRateChart views={views} contacts={contacts} groupBy={groupBy}/>
       </Box>
       <Box className={"StatsPage-chart"}>
-        <TopUsersChart contacts={[]}/>
+        <TopUsersChart contacts={contacts}/>
       </Box>
     </Box>
   )
