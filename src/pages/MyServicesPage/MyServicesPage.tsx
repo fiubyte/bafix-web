@@ -41,6 +41,11 @@ const MyServicesPage = () => {
         }}>
           Agregar un nuevo servicio
         </Button>
+        <Button variant={"contained"} className={"MyServicesPage-button"} onClick={() => {
+          navigate("/estadisticas")
+        }}>
+          Ver estadísticas
+        </Button>
       </Box>
       <Box className={"MyServicesPage-services"}>
         {services.map((service) => (<ProviderServiceItem service={service}/>))}
