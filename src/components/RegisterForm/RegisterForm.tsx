@@ -29,6 +29,16 @@ interface RegisterValues {
   profile_photo_url: string;
 }
 
+const validateDNI = async (document_number: string) => {
+  try {
+    const response = await axios.get(`${config.apiUrl}/Users/document_avaible/${document_number}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error validating DNI:', error);
+    return false;
+  }
+};
+
 const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
   const navigate = useNavigate();
   const validationSchema = Yup.object({
@@ -70,6 +80,18 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
       max_radius: 5,
       profile_photo_url: '',
     },
+    validationSchema,
+    validate: async (values) => {
+    const errors: Partial<RegisterValues> = {};
+
+    // Validación personalizada para el número de documento
+    const isDocumentAvailable = await validateDNI(values.document_number);
+    if (!isDocumentAvailable) {
+      errors.document_number = 'El número de documento ya está registrado';
+      toast.error('El número de documento ya está registrado, por favor, ingrese otro.');
+    }
+    return errors;
+  },
     onSubmit: async (values) => {
       try {
 
@@ -106,7 +128,6 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
         }
       }
     },
-    validationSchema,
     validateOnChange: true,
     validateOnBlur: true,
   });
