@@ -29,16 +29,6 @@ interface RegisterValues {
   profile_photo_url: string;
 }
 
-const validateDNI = async (document_number: string) => {
-  try {
-    const response = await axios.get(`${config.apiUrl}/Users/document_avaible/${document_number}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error validating DNI:', error);
-    return false;
-  }
-};
-
 const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
   const navigate = useNavigate();
   const validationSchema = Yup.object({
@@ -84,11 +74,6 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
     validate: async (values) => {
     const errors: Partial<RegisterValues> = {};
 
-    // Validación personalizada para el número de documento
-    const isDocumentAvailable = await validateDNI(values.document_number);
-    if (!isDocumentAvailable) {
-      errors.document_number = 'El número de documento ya está registrado';
-    }
     return errors;
   },
     onSubmit: async (values) => {
@@ -119,8 +104,10 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.status === 400 && error.response.data.detail === 'Email is taken') {
             toast.error('El email ya está en uso. Por favor, utiliza otro email.');
+          } else if (error.response.status === 400 && error.response.data.detail === 'Document number is taken') {
+            toast.error('El número de documento ya está en uso. Por favor, utiliza otro número de documento.');
           } else {
-            toast.error('Error en el registro. Por favor, inténtalo de nuevo.');
+            toast.error('Error al crear el usuario. Por favor, verifica los datos ingresados.');
           }
         } else {
           toast.error('Error de conexión. Por favor, verifica tu conexión a internet.');
