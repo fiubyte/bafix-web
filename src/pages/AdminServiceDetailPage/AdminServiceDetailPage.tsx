@@ -1,4 +1,4 @@
-import {Alert, Box, Button, Grid, Link, Modal, Rating, Snackbar, Typography} from "@mui/material";
+import {Alert, Box, Button, Grid, IconButton, Link, Modal, Rating, Snackbar, Tooltip, Typography} from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import React, {useEffect} from "react";
 import "./AdminServiceDetailPage.css";
@@ -7,6 +7,8 @@ import axios from "axios";
 import config from "../../config";
 import {Service} from "../../models/Service";
 import RejectModal from "../../components/RejectModal/RejectModal";
+import DoneIcon from '@mui/icons-material/Done';
+import CloseIcon from '@mui/icons-material/Close';
 
 const AdminServiceDetailPage = () => {
 
@@ -332,14 +334,23 @@ const AdminServiceDetailPage = () => {
                   onClick={() => handlePutProviderToReview(service.user.id)}>PONER EN REVISIÓN</Button>
               )}
               {service?.user.approved == null && (
-                <Button
+                <IconButton
                   className={"AdminServiceDetailPage-validate-button"}
-                  onClick={() => handleApproveUser(service.user.id)}>VALIDAR IDENTIDAD</Button>
+                  onClick={() => handleApproveUser(service.user.id)}
+                >
+                  <Tooltip title={"Aprobar Identidad"}>
+                    <DoneIcon/>
+                  </Tooltip>
+                </IconButton>
               )}
               {service?.user.approved == null && (
-                <Button
+                <IconButton
                   className={"AdminServiceDetailPage-validate-button"}
-                  onClick={() => handleOpenRejectProviderModal()}>RECHAZAR INDENTIDAD</Button>
+                  onClick={() => handleOpenRejectProviderModal()}>
+                  <Tooltip title={"Rechazar Identidad"}>
+                    <CloseIcon/>
+                  </Tooltip>
+                </IconButton>
               )}
             </Grid>
           </Grid>
@@ -369,9 +380,13 @@ const AdminServiceDetailPage = () => {
             </Grid>
             <Grid item xs={4} className={"AdminServiceDetailPage-data-container"}>
               {service?.approved == null && (
-                <Button
+                <IconButton
                   className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-validated"}
-                  onClick={() => handleApproveService(service?.id)}>APROBAR</Button>
+                  onClick={() => handleApproveService(service?.id)}>
+                  <Tooltip title={"Aprobar servicio"}>
+                    <DoneIcon/>
+                  </Tooltip>
+                </IconButton>
               )}
               {service?.approved && (
                 <Button
@@ -384,9 +399,13 @@ const AdminServiceDetailPage = () => {
                 >RECHAZADO</Button>
               )}
               {service?.approved == null && (
-                <Button
+                <IconButton
                   className={"AdminServiceDetailPage-validate-button AdminServiceDetailPage-rejected"}
-                  onClick={() => handleOpenRejectServiceModal()}>RECHAZAR</Button>
+                  onClick={() => handleOpenRejectServiceModal()}>
+                  <Tooltip title={"Rechazar servicio"}>
+                    <CloseIcon/>
+                  </Tooltip>
+                </IconButton>
               )}
             </Grid>
           </Grid>
