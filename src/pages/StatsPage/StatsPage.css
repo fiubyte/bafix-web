@@ -35,9 +35,9 @@
   width: 15rem;
 }
 
-.StatsPage-conversion-chart {
+.StatsPage-chart {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 52rem;
   margin-top: 1rem;
 }

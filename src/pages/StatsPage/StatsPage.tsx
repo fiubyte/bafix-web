@@ -7,6 +7,7 @@ import dayjs, {Dayjs} from "dayjs";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import ConversionRateChart from "../../components/ConversionRateChart/ConversionRateChart";
+import TopUsersChart from "../../components/TopUsersChart/TopUsersChart";
 
 const StatsPage = () => {
 
@@ -57,10 +58,12 @@ const StatsPage = () => {
           </Box>
         </Box>
       </LocalizationProvider>
-      <Box className={"StatsPage-conversion-chart"}>
+      <Box className={"StatsPage-chart"}>
         <ConversionRateChart views={[]} contacts={[]} groupBy={groupBy}/>
       </Box>
-
+      <Box className={"StatsPage-chart"}>
+        <TopUsersChart contacts={[]}/>
+      </Box>
     </Box>
   )
 }
