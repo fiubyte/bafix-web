@@ -1,0 +1,17 @@
+.StatsPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.StatsPage-banner {
+  width: 100%;
+  background-color: #FEE94C;
+  padding: 0.7rem;
+  margin-top: 1rem;
+}
+
+.StatsPage-title {
+  margin-left: 2rem;
+}
