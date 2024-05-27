@@ -45,12 +45,12 @@ const StatsPage = () => {
   }, []);
 
   useEffect(() => {
-    const filteredViews = views.filter(view => dayjs(view.timestamp).isAfter(initialDate.add(-1, "day")) && dayjs(view.timestamp).isBefore(finalDate));
+    const filteredViews = views.filter(view => dayjs(view.timestamp).isAfter(initialDate) && dayjs(view.timestamp).isBefore(finalDate));
     setFilteredViews(filteredViews);
   }, [views, initialDate, finalDate]);
 
   useEffect(() => {
-    const filteredContacts = contacts.filter(contact => dayjs(contact.timestamp).isAfter(initialDate.add(-1, "day")) && dayjs(contact.timestamp).isBefore(finalDate));
+    const filteredContacts = contacts.filter(contact => dayjs(contact.timestamp).isAfter(initialDate) && dayjs(contact.timestamp).isBefore(finalDate));
     setFilteredContacts(filteredContacts);
   }, [contacts, initialDate, finalDate]);
 
