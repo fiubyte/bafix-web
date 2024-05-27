@@ -34,3 +34,10 @@
 .StatsPage-date-picker {
   width: 15rem;
 }
+
+.StatsPage-conversion-chart {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
+}
