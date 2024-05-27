@@ -3,6 +3,7 @@
 import {ServiceView} from "../../models/ServiceView";
 import {useEffect, useState} from "react";
 import {ServiceContact} from "../../models/ServiceContact";
+import {BarChart, Card} from "@tremor/react";
 
 interface ConversionRateChartProps {
   views: ServiceView[];
@@ -12,8 +13,8 @@ interface ConversionRateChartProps {
 
 interface ConversionRateData {
   date: string;
-  views: number;
-  contacts: number;
+  Visitas: number;
+  Contactos: number;
 }
 
 const ConversionRateChart = ({views, contacts, groupBy}: ConversionRateChartProps) => {
@@ -26,22 +27,38 @@ const ConversionRateChart = ({views, contacts, groupBy}: ConversionRateChartProp
       const date = groupBy === "day" ? view.timestamp.toISOString().slice(0, 10) : view.timestamp.toISOString().slice(0, 7);
       const existingData = groupedData.find(item => item.date === date);
       if (existingData) {
-        existingData.views++;
+        existingData.Visitas++;
       } else {
-        groupedData.push({date, views: 1, contacts: 0});
+        groupedData.push({date, Visitas: 1, Contactos: 0});
       }
     });
     contacts.forEach(contact => {
       const date = groupBy === "day" ? contact.timestamp.toISOString().slice(0, 10) : contact.timestamp.toISOString().slice(0, 7);
       const existingData = groupedData.find(item => item.date === date);
       if (existingData) {
-        existingData.contacts++;
+        existingData.Contactos++;
       } else {
-        groupedData.push({date, views: 0, contacts: 1});
+        groupedData.push({date, Visitas: 0, Contactos: 1});
       }
     });
     setData(groupedData);
   }, [views, groupBy]);
+
+  return (
+    <Card className="max-w-4xl">
+      <h3 className="text-lg font-medium text-tremor-content-strong">
+        Tasa de conversión
+      </h3>
+      <BarChart
+        className="mt-2 h-80"
+        data={data}
+        index="date"
+        categories={["Visitas", "Contactos"]}
+        colors={["amber", "rose"]}
+        yAxisWidth={33}
+      />
+    </Card>
+  );
 }
 
 export default ConversionRateChart;
