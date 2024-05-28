@@ -56,19 +56,19 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
 
   const formik = useFormik<RegisterValues>({
     initialValues: {
-      email: '',
-      password: '',
-      password2: '',
-      name: '',
-      surname: '',
-      document_number: '',
-      document_photo_url: '',
-      street: '',
-      street_number: '',
-      postal_code: '',
-      phone_number: '',
+      email: 'carlosf@gmail.com',
+      password: '123123',
+      password2: '123123',
+      name: 'carlos',
+      surname: 'Montes',
+      document_number: '1111111',
+      document_photo_url: 'foto.png',
+      street: 'guemes',
+      street_number: '1233',
+      postal_code: '1232',
+      phone_number: '1111111111',
       max_radius: 5,
-      profile_photo_url: '',
+      profile_photo_url: 'foto.png',
     },
     onSubmit: async (values) => {
       try {
@@ -108,6 +108,7 @@ const RegisterForm = ({handleSubmitError}: RegisterFormProps): JSX.Element => {
         }
       }
     },
+    validationSchema,
     validateOnChange: true,
     validateOnBlur: true,
   });
