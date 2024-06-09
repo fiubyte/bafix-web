@@ -34,3 +34,8 @@
 .AdminDashboardPage-date-picker {
   width: 15rem;
 }
+
+.AdminDashboardPage-charts {
+  margin-top: 1rem;
+  width: 90%;
+}
