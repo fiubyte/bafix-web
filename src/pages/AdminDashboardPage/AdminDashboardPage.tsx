@@ -9,6 +9,7 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import TotalUsersChart from "../../components/TotalUsersChart/TotalUsersChart";
 import TotalProvidersChart from "../../components/TotalProvidersChart/TotalProvidersChart";
 import TopConversionRateChart from "../../components/TopConversionRateChart/TopConversionRateChart";
+import TopContactsChart from "../../components/TopContactsChart/TopContactsChart";
 
 const AdminDashboardPage = () => {
 
@@ -60,6 +61,15 @@ const AdminDashboardPage = () => {
         </Box>
       </LocalizationProvider>
       <Grid container spacing={2} className={"AdminDashboardPage-charts"}>
+        <Grid item xs={4}>
+          <TopContactsChart initialDate={initialDate} finalDate={finalDate}/>
+        </Grid>
+        <Grid item xs={4}>
+          <TopContactsChart initialDate={initialDate} finalDate={finalDate}/>
+        </Grid>
+        <Grid item xs={4}>
+          <TopContactsChart initialDate={initialDate} finalDate={finalDate}/>
+        </Grid>
         <Grid item xs={6}>
           <TotalUsersChart groupBy={groupBy} initialDate={initialDate} finalDate={finalDate}/>
         </Grid>
