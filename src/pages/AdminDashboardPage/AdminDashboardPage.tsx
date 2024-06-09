@@ -10,6 +10,7 @@ import TotalUsersChart from "../../components/TotalUsersChart/TotalUsersChart";
 import TotalProvidersChart from "../../components/TotalProvidersChart/TotalProvidersChart";
 import TopConversionRateChart from "../../components/TopConversionRateChart/TopConversionRateChart";
 import TopContactsChart from "../../components/TopContactsChart/TopContactsChart";
+import TopServicesChart from "../../components/TopServicesChart/TopServicesChart";
 
 const AdminDashboardPage = () => {
 
@@ -65,7 +66,7 @@ const AdminDashboardPage = () => {
           <TopContactsChart initialDate={initialDate} finalDate={finalDate}/>
         </Grid>
         <Grid item xs={4}>
-          <TopContactsChart initialDate={initialDate} finalDate={finalDate}/>
+          <TopServicesChart initialDate={initialDate} finalDate={finalDate}/>
         </Grid>
         <Grid item xs={4}>
           <TopContactsChart initialDate={initialDate} finalDate={finalDate}/>

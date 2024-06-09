@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import config from "../../config";
 import {Box, Typography} from "@mui/material";
+import "./TopContactsChart.css"
 
 interface TopContactsChartProps {
   initialDate: Dayjs;
