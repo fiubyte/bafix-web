@@ -1,0 +1,36 @@
+.AdminDashboardPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.AdminDashboardPage-banner {
+  width: 100%;
+  background-color: #FEE94C;
+  padding: 0.7rem;
+  margin-top: 1rem;
+}
+
+.AdminDashboardPage-title {
+  margin-left: 2rem;
+}
+
+.AdminDashboardPage-filter-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.AdminDashboardPage-filter {
+  margin: 0 1rem;
+}
+
+.AdminDashboardPage-groupby {
+  width: 15rem;
+}
+
+.AdminDashboardPage-date-picker {
+  width: 15rem;
+}
