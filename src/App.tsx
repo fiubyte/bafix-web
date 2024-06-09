@@ -13,6 +13,7 @@ import ProviderServiceDetailPage from "./pages/ProviderServiceDetailPage/Provide
 import InstallAppPage from "./pages/InstallAppPage/InstallAppPage";
 import ChartExample from "./pages/ChartExample/ChartExample";
 import StatsPage from "./pages/StatsPage/StatsPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage/AdminDashboardPage";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path={'/service/:id'} Component={InstallAppPage}/>
             <Route path={'/agregar-servicio'} Component={AddServicePage}/>
             <Route path={'/estadisticas'} Component={StatsPage}/>
+            <Route path={'/admin/dashboard'} Component={AdminDashboardPage}/>
             <Route path={'/admin'} Component={AdminLoginPage}/>
             <Route path={'/admin/inicio'} Component={AdminHomePage}/>
             <Route path={'/admin/servicio/:id/detalle'} Component={AdminServiceDetailPage}/>
