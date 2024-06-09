@@ -1,0 +1,19 @@
+.TopContactsChart-chart {
+  display: flex;
+  flex-direction: column;
+}
+
+.TopContactsChart-user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.TopContactsChart-img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 85%;
+  margin-right: 0.2rem;
+}
