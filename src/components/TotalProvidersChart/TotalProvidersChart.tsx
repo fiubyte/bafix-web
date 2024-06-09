@@ -6,26 +6,26 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import config from "../../config";
 
-interface TotalUsersChartProps {
+interface TotalProvidersChartProps {
   groupBy: "day" | "month";
   initialDate: Dayjs;
   finalDate: Dayjs;
 }
 
-interface TotalUsersData {
+interface TotalProvidersData {
   timestamp: string;
-  total_users: number;
+  total_providers: number;
 }
 
-interface TotalUsersChartData {
+interface TotalProvidersChartData {
   Fecha: string;
-  Usuarios: number;
+  Proveedores: number;
 }
 
-const TotalUsersChart = ({groupBy, initialDate, finalDate}: TotalUsersChartProps) => {
+const TotalProvidersChart = ({groupBy, initialDate, finalDate}: TotalProvidersChartProps) => {
 
-  const [data, setData] = useState<TotalUsersData[]>([]);
-  const [chartData, setChartData] = useState<TotalUsersChartData[]>([]);
+  const [data, setData] = useState<TotalProvidersData[]>([]);
+  const [chartData, setChartData] = useState<TotalProvidersChartData[]>([]);
 
   const fillChartDataDay = () => {
     const dates: string[] = [];
@@ -34,13 +34,13 @@ const TotalUsersChart = ({groupBy, initialDate, finalDate}: TotalUsersChartProps
       dates.push(currentDate.format('YYYY-MM-DD'));
       currentDate = currentDate.add(1, 'day');
     }
-    const cData: TotalUsersChartData[] = [];
+    const cData: TotalProvidersChartData[] = [];
     dates.forEach(date => {
       const existingData = data.find(item => item.timestamp.slice(0, 10) === date);
       if (existingData) {
-        cData.push({Fecha: date, Usuarios: existingData.total_users});
+        cData.push({Fecha: date, Proveedores: existingData.total_providers});
       } else {
-        cData.push({Fecha: date, Usuarios: 0});
+        cData.push({Fecha: date, Proveedores: 0});
       }
     });
     setChartData(cData);
@@ -54,18 +54,18 @@ const TotalUsersChart = ({groupBy, initialDate, finalDate}: TotalUsersChartProps
       dates.push(currentDate.format('YYYY-MM'));
       currentDate = currentDate.add(1, 'month').startOf('month');
     }
-    const cData: TotalUsersChartData[] = [];
+    const cData: TotalProvidersChartData[] = [];
     dates.forEach(date => {
         const total = data.filter(item => item.timestamp.slice(0, 7) == date)
-          .reduce((acc, item) => acc + item.total_users, 0);
-        cData.push({Fecha: date, Usuarios: total});
+          .reduce((acc, item) => acc + item.total_providers, 0);
+        cData.push({Fecha: date, Proveedores: total});
       }
     );
     setChartData(cData);
   }
 
   useEffect(() => {
-    axios.get(`${config.apiUrl}/users/metrics/total_users`)
+    axios.get(`${config.apiUrl}/users/metrics/total_providers`)
       .then(response => {
         setData(response.data);
       }).catch(error => {
@@ -85,18 +85,18 @@ const TotalUsersChart = ({groupBy, initialDate, finalDate}: TotalUsersChartProps
   return (
     <Card className="max-w-4xl">
       <h3 className="text-lg font-medium text-tremor-content-strong">
-        Evolución de la cantidad total de usuarios
+        Evolución de la cantidad total de proveedores
       </h3>
       <LineChart
         className="h-80"
         data={chartData}
         index="Fecha"
-        categories={['Usuarios']}
-        colors={['indigo']}
+        categories={['Proveedores']}
+        colors={['rose']}
         yAxisWidth={60}
       />
     </Card>
   );
 }
 
-export default TotalUsersChart;
+export default TotalProvidersChart;

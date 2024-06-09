@@ -7,6 +7,7 @@ import dayjs, {Dayjs} from "dayjs";
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import TotalUsersChart from "../../components/TotalUsersChart/TotalUsersChart";
+import TotalProvidersChart from "../../components/TotalProvidersChart/TotalProvidersChart";
 
 const AdminDashboardPage = () => {
 
@@ -57,12 +58,12 @@ const AdminDashboardPage = () => {
           </Box>
         </Box>
       </LocalizationProvider>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className={"AdminDashboardPage-charts"}>
         <Grid item xs={6}>
           <TotalUsersChart groupBy={groupBy} initialDate={initialDate} finalDate={finalDate}/>
         </Grid>
         <Grid item xs={6}>
-
+          <TotalProvidersChart  groupBy={groupBy} initialDate={initialDate} finalDate={finalDate}/>
         </Grid>
       </Grid>
     </Box>
