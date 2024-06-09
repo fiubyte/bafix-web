@@ -35,12 +35,13 @@ const TotalUsersChart = ({groupBy, initialDate, finalDate}: TotalUsersChartProps
       currentDate = currentDate.add(1, 'day');
     }
     const cData: TotalUsersChartData[] = [];
-    dates.forEach(date => {
+    dates.forEach((date, index) => {
       const existingData = data.find(item => item.timestamp.slice(0, 10) === date);
       if (existingData) {
         cData.push({Fecha: date, Usuarios: existingData.total_users});
       } else {
-        cData.push({Fecha: date, Usuarios: 0});
+        const users = index == 0 ? 0 : cData[index - 1].Usuarios;
+        cData.push({Fecha: date, Usuarios: users});
       }
     });
     setChartData(cData);
@@ -55,17 +56,21 @@ const TotalUsersChart = ({groupBy, initialDate, finalDate}: TotalUsersChartProps
       currentDate = currentDate.add(1, 'month').startOf('month');
     }
     const cData: TotalUsersChartData[] = [];
-    dates.forEach(date => {
+    dates.forEach((date, index) => {
         const total = data.filter(item => item.timestamp.slice(0, 7) == date)
           .reduce((acc, item) => acc + item.total_users, 0);
-        cData.push({Fecha: date, Usuarios: total});
+        if (total == 0 && index > 0) {
+          cData.push({Fecha: date, Usuarios: cData[index - 1].Usuarios});
+        } else {
+          cData.push({Fecha: date, Usuarios: total});
+        }
       }
     );
     setChartData(cData);
   }
 
   useEffect(() => {
-    axios.get(`${config.apiUrl}/users/metrics/total_users`)
+    axios.get(`${config.apiUrl}/users/metrics/total_users`, {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
       .then(response => {
         setData(response.data);
       }).catch(error => {
@@ -80,7 +85,7 @@ const TotalUsersChart = ({groupBy, initialDate, finalDate}: TotalUsersChartProps
     } else {
       fillChartDataMonth();
     }
-  }, [groupBy, initialDate, finalDate]);
+  }, [data, groupBy, initialDate, finalDate]);
 
   return (
     <Card className="max-w-4xl">

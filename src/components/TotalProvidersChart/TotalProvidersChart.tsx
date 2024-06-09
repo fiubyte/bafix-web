@@ -35,12 +35,13 @@ const TotalProvidersChart = ({groupBy, initialDate, finalDate}: TotalProvidersCh
       currentDate = currentDate.add(1, 'day');
     }
     const cData: TotalProvidersChartData[] = [];
-    dates.forEach(date => {
+    dates.forEach((date, index) => {
       const existingData = data.find(item => item.timestamp.slice(0, 10) === date);
       if (existingData) {
         cData.push({Fecha: date, Proveedores: existingData.total_providers});
       } else {
-        cData.push({Fecha: date, Proveedores: 0});
+        const users = index == 0 ? 0 : cData[index - 1].Proveedores;
+        cData.push({Fecha: date, Proveedores: users});
       }
     });
     setChartData(cData);
@@ -55,17 +56,21 @@ const TotalProvidersChart = ({groupBy, initialDate, finalDate}: TotalProvidersCh
       currentDate = currentDate.add(1, 'month').startOf('month');
     }
     const cData: TotalProvidersChartData[] = [];
-    dates.forEach(date => {
+    dates.forEach((date, index) => {
         const total = data.filter(item => item.timestamp.slice(0, 7) == date)
           .reduce((acc, item) => acc + item.total_providers, 0);
-        cData.push({Fecha: date, Proveedores: total});
+        if (total == 0 && index > 0) {
+          cData.push({Fecha: date, Proveedores: cData[index - 1].Proveedores});
+        } else {
+          cData.push({Fecha: date, Proveedores: total});
+        }
       }
     );
     setChartData(cData);
   }
 
   useEffect(() => {
-    axios.get(`${config.apiUrl}/users/metrics/total_providers`)
+    axios.get(`${config.apiUrl}/users/metrics/total_providers`, {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}})
       .then(response => {
         setData(response.data);
       }).catch(error => {
@@ -80,7 +85,7 @@ const TotalProvidersChart = ({groupBy, initialDate, finalDate}: TotalProvidersCh
     } else {
       fillChartDataMonth();
     }
-  }, [groupBy, initialDate, finalDate]);
+  }, [data, groupBy, initialDate, finalDate]);
 
   return (
     <Card className="max-w-4xl">
