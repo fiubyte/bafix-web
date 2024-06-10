@@ -27,7 +27,7 @@ const AdminDashboardPage = () => {
     <Box className={"AdminDashboardPage"}>
       <Navbar isUserLoggedIn={true}/>
       <Box className={"AdminDashboardPage-banner"}>
-        <Typography variant={"h2"} className={"StatsPage-title"}>Dashboard</Typography>
+        <Typography variant={"h2"} className={"AdminDashboardPage-title"}>Dashboard</Typography>
       </Box>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Box className={"AdminDashboardPage-filter-container"}>
@@ -80,7 +80,7 @@ const AdminDashboardPage = () => {
           <TotalUsersChart groupBy={groupBy} initialDate={initialDate} finalDate={finalDate}/>
         </Grid>
         <Grid item xs={6}>
-          <TotalProvidersChart  groupBy={groupBy} initialDate={initialDate} finalDate={finalDate}/>
+          <TotalProvidersChart groupBy={groupBy} initialDate={initialDate} finalDate={finalDate}/>
         </Grid>
         <Grid item xs={12}>
           <TopConversionRateChart initialDate={initialDate} finalDate={finalDate}/>
