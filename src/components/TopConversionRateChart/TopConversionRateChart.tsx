@@ -62,7 +62,7 @@ const TopConversionRateChart = ({initialDate, finalDate}: TopConversionRateChart
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <BarChart
-            data={data}
+            data={data.slice(0, 10)}
             index="Servicio"
             categories={['Tasa de conversion']}
             colors={['blue']}
