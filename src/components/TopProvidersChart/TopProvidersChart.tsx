@@ -26,7 +26,7 @@ const TopProvidersChart = ({initialDate, finalDate}: TopContactsChartProps) => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`${config.apiUrl}/users/metric/top_providers/?start_date=${initialDate.format().slice(0, 19)}&end_date=${finalDate.format().slice(0, 19)}`, {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}}).then(r => {
+    axios.get(`${config.apiUrl}/services/metrics/top_providers/?start_date=${initialDate.format().slice(0, 19)}&end_date=${finalDate.format().slice(0, 19)}`, {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}}).then(r => {
       setData(r.data);
       setLoading(false);
     }).catch(e => {
@@ -37,7 +37,7 @@ const TopProvidersChart = ({initialDate, finalDate}: TopContactsChartProps) => {
   const renderUser = (user: TopProvidersData) => {
     return (
       <Box className={"TopContactsChart-user"}>
-        <img src={user.photo_url} alt={`${user.user_name} ${user.user_surame}`} className={"TopProvidersChart-image"}/>
+        <img src={user.photo_url} alt={`${user.user_name} ${user.user_surame}`} className={"TopProvidersChart-img"}/>
         <Typography variant={"body1"}>{user.user_name} {user.user_surame}</Typography>
       </Box>
     )

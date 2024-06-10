@@ -29,7 +29,7 @@ const TopServicesChart = ({initialDate, finalDate}: TopContactsChartProps) => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`${config.apiUrl}/services/metric/top_services/?start_date=${initialDate.format().slice(0, 19)}&end_date=${finalDate.format().slice(0, 19)}`, {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}}).then(r => {
+    axios.get(`${config.apiUrl}/services/metrics/top_services/?start_date=${initialDate.format().slice(0, 19)}&end_date=${finalDate.format().slice(0, 19)}`, {headers: {"Authorization": `Bearer ${localStorage.getItem(config.LOCAL_STORAGE_JWT_KEY)}`}}).then(r => {
       setData(r.data);
       setLoading(false);
     }).catch(e => {
@@ -41,7 +41,7 @@ const TopServicesChart = ({initialDate, finalDate}: TopContactsChartProps) => {
     return (
       <Box className={"TopServicesChart-service"}
            onClick={() => navigate(`/admin/servicio/${service.service_id}/detalle`)}>
-        <img src={service.photo_url} alt={service.title} className={"TopServicesChart-image"}/>
+        <img src={service.photo_url} alt={service.title} className={"TopServicesChart-img"}/>
         <Typography variant={"body1"}>{service.title}</Typography>
       </Box>
     )

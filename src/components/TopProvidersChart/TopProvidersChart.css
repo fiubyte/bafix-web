@@ -12,8 +12,9 @@
 }
 
 .TopProvidersChart-img {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 85%;
-  margin-right: 0.2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  margin-right: 0.5rem;
+  object-fit: cover;
 }
