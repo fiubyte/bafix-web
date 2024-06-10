@@ -1,4 +1,4 @@
-import {Box, Typography} from "@mui/material";
+import {Box, Button, Typography} from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import React, {useEffect} from "react";
 import './AdminHomePage.css';
@@ -6,6 +6,7 @@ import ProviderServiceItem from "../../components/ProviderServiceItem/ProviderSe
 import axios from "axios";
 import config from "../../config";
 import {Service} from "../../models/Service";
+import {useNavigate} from "react-router-dom";
 
 const AdminHomePage = () => {
 
@@ -14,6 +15,7 @@ const AdminHomePage = () => {
   const [rejectedServices, setRejectedServices] = React.useState<Service[]>([]);
   const [serviceError, setServiceError] = React.useState(false);
   const [servicesLoaded, setServicesLoaded] = React.useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`${config.apiUrl}/services`,
@@ -36,6 +38,13 @@ const AdminHomePage = () => {
       <Navbar isUserLoggedIn={true}/>
       <Box className={"AdminHomePage-banner"}>
         <Typography variant={"h2"} className={"AdminHomePage-title"}>Servicios Registrados</Typography>
+      </Box>
+      <Box className={"AdminHomePage-button-container"}>
+        <Button variant={"contained"} className={"AdminHomePage-button"} onClick={() => {
+          navigate("/admin/dashboard")
+        }}>
+          Dashboard
+        </Button>
       </Box>
       <Box className={"AdminHomePage-services"}>
         {!serviceError && pendentServices.length > 0 && (
