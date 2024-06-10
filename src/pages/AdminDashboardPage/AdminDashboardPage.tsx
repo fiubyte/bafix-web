@@ -17,7 +17,11 @@ const AdminDashboardPage = () => {
 
   const [groupBy, setGroupBy] = useState<"day" | "month">("day");
   const [initialDate, setInitialDate] = useState<Dayjs>(dayjs().startOf("month"));
-  const [finalDate, setFinalDate] = useState<Dayjs>(dayjs().endOf("month"));
+  const [finalDate, setFinalDate] = useState<Dayjs>(dayjs());
+
+  const minDate = (d1: Dayjs, d2: Dayjs) => {
+    return d1.isBefore(d2) ? d1 : d2;
+  }
 
   return (
     <Box className={"AdminDashboardPage"}>
@@ -48,7 +52,7 @@ const AdminDashboardPage = () => {
               className={"AdminDashboardPage-date-picker"}
               value={initialDate}
               onChange={(date) => setInitialDate(date as Dayjs)}
-              maxDate={finalDate}
+              maxDate={minDate(finalDate, dayjs())}
             />
           </Box>
           <Box className={"AdminDashboardPage-filter"}>
